@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillPath - Refugee Student Settlement Pathway</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e3a5f;
+            --accent-coral: #e85d4e;
+            --accent-teal: #2eccc0;
+            --accent-pink: #f5d4d4;
+            --accent-light-blue: #d4e8f0;
+            --text-dark: #1a1a1a;
+            --text-light: #555;
+            --bg-light: #fafaf9;
+            --bg-white: #ffffff;
+            --success: #2eccc0;
+            --warning: #e85d4e;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--bg-white);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-logo img {
+            height: 40px;
+        }
+
+        .nav-title {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-weight: 500;
+            line-height: 1.2;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-coral);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--accent-light-blue) 0%, var(--accent-pink) 50%, rgba(46, 204, 192, 0.1) 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            border-bottom: 2px solid #eee;
+        }
+
+        .tab-button {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-light);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab-button.active {
+            color: var(--accent-coral);
+            border-bottom-color: var(--accent-coral);
+        }
+
+        .tab-button:hover {
+            color: var(--accent-teal);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-item {
+            margin-bottom: 2.5rem;
+            padding-left: 3rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background-color: var(--accent-teal);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--accent-teal);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item.completed::before {
+            background-color: var(--success);
+            box-shadow: 0 0 0 3px var(--success);
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -1px;
+            top: 20px;
+            width: 3px;
+            height: calc(100% + 30px);
+            background-color: #ddd;
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .timeline-item h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .timeline-item p {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .timeline-item ul {
+            margin-left: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .checkbox {
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--accent-teal);
+        }
+
+        .checkbox label {
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* Celebration Modal */
+        .celebration-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .celebration-modal.active {
+            display: flex;
+        }
+
+        .celebration-content {
+            background: white;
+            padding: 4rem 3rem;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 600px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            animation: slideInCelebration 0.5s ease-out;
+        }
+
+        @keyframes slideInCelebration {
+            from {
+                transform: translateY(-80px) scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            pointer-events: none;
+        }
+
+        .celebration-emoji {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            animation: bounce 0.6s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+        }
+
+        .celebration-content h2 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .celebration-content p {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .celebration-button {
+            background-color: var(--accent-teal);
+            color: white;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .celebration-button:hover {
+            background-color: #27b5a9;
+            transform: translateY(-2px);
+        }
+
+        .celebration-button:active {
+            transform: translateY(0);
+        }
+
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background-color: var(--bg-white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .card a {
+            color: var(--accent-coral);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .card a:hover {
+            color: var(--accent-teal);
+        }
+
+        .contact-info {
+            background-color: var(--accent-light-blue);
+            padding: 1rem;
+            border-left: 4px solid var(--accent-teal);
+            margin-top: 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .contact-info strong {
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        /* Emergency Section */
+        .emergency {
+            background-color: var(--warning);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .emergency h2 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .emergency-contacts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .emergency-contact {
+            background-color: rgba(255,255,255,0.2);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .emergency-contact h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .emergency-contact p {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .emergency-number {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        footer a {
+            color: var(--accent-teal);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .tabs {
+                gap: 0.5rem;
+            }
+
+            .tab-button {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .celebration-content {
+                padding: 2rem;
+                margin: 1rem;
+            }
+
+            .celebration-emoji {
+                font-size: 3rem;
+            }
+
+            .celebration-content h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-logo">
+            <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/1ebcd5a3-9db5-47bd-b470-4f3269e3680e" alt="SkillPath Logo">
+            <div class="nav-title">Refugee Student<br>Settlement Pathway</div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#start">Get Started</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#explore">Explore Melbourne</a></li>
+            <li><a href="#emergency">Help</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="start">
+        <h1>Welcome to Melbourne! 🎉</h1>
+        <p>You're starting a new chapter. Let's make your first steps easier together.</p>
+        <p style="font-size: 1rem; color: var(--text-light);">This guide will help you get settled with everything you need to know.</p>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Timeline Section -->
+        <section style="margin-bottom: 4rem;">
+            <h2 style="color: var(--primary); margin-bottom: 2rem; font-size: 1.8rem;">📋 Your First 4 Weeks Checklist</h2>
+            <p style="color: var(--text-light); margin-bottom: 2rem; font-size: 1.05rem;">Click on each task to mark it complete. Take your time—you don't need to do everything at once!</p>
+
+            <div class="timeline">
+                <div class="timeline-item" id="item1">
+                    <h3>Week 1: Register for Government Services</h3>
+                    <p><strong>Why?</strong> These are the foundation for everything else—money, health, housing.</p>
+                    <ul>
+                        <li>Visit <strong>Centrelink</strong> (inside a <strong>Services Australia</strong> office) to register for income support</li>
+                        <li>Ask about your <strong>Customer Reference Number (CRN)</strong>—you'll need this for almost everything</li>
+                        <li>Find your nearest office at <a href="https://www.servicesaustralia.gov.au/locations" target="_blank" style="color: var(--accent-coral);">servicesaustralia.gov.au/locations</a></li>
+                    </ul>
+                    <div class="checkbox">
+                        <input type="checkbox" id="task1" onchange="updateTimeline(this, 'item1')">
+                        <label for="task1">Mark this done</label>
+                    </div>
+                </div>
+
+                <div class="timeline-item" id="item2">
+                    <h3>Week 1–2: Enrol in Medicare</h3>
+                    <p><strong>Why?</strong> Free or cheap healthcare for you and your family.</p>
+                    <ul>
+                        <li>Visit a Medicare office (usually inside Centrelink) 7–10 days after arrival</li>
+                        <li>Bring your passport and visa documents</li>
+                        <li>You'll get a <strong>Medicare card</strong> in about 2 weeks</li>
+                    </ul>
+                    <div class="checkbox">
+                        <input type="checkbox" id="task2" onchange="updateTimeline(this, 'item2')">
+                        <label for="task2">Mark this done</label>
+                    </div>
+                </div>
+
+                <div class="timeline-item" id="item3">
+                    <h3>Week 1–2: Open an Australian Bank Account</h3>
+                    <p><strong>Why?</strong> You need this to get paid, pay bills, and manage money safely.</p>
+                    <ul>
+                        <li>Go to a major bank (Commonwealth, Westpac, ANZ, NAB) with your passport and visa</li>
+                        <li>Ask for a proof-of-address letter from your housing provider if needed</li>
+                        <li>They'll help you open an account on the spot—it's free!</li>
+                    </ul>
+                    <div class="checkbox">
+                        <input type="checkbox" id="task3" onchange="updateTimeline(this, 'item3')">
+                        <label for="task3">Mark this done</label>
+                    </div>
+                </div>
+
+                <div class="timeline-item" id="item4">
+                    <h3>Week 1: Connect with a Settlement Provider</h3>
+                    <p><strong>Why?</strong> They're expert helpers who will guide you through everything and can help with housing, language classes, and more.</p>
+                    <ul>
+                        <li><strong>AMES Australia</strong> – accommodation, English classes, job training <a href="https://www.ames.net.au" target="_blank" style="color: var(--accent-coral);">ames.net.au</a></li>
+                        <li><strong>Uniting Vic.Tas</strong> – housing, food, community support <a href="https://www.unitingvictas.org.au" target="_blank" style="color: var(--accent-coral);">unitingvictas.org.au</a></li>
+                        <li><strong>SkillPath</strong> – tertiary education & refugee student settlement <a href="https://www.skillpath.org.au" target="_blank" style="color: var(--accent-coral);">skillpath.org.au</a></li>
+                    </ul>
+                    <div class="checkbox">
+                        <input type="checkbox" id="task4" onchange="updateTimeline(this, 'item4')">
+                        <label for="task4">Mark this done</label>
+                    </div>
+                </div>
+
+                <div class="timeline-item" id="item5">
+                    <h3>Week 2–3: Get a Local Doctor</h3>
+                    <p><strong>Why?</strong> For health checks, vaccinations, and sick care.</p>
+                    <ul>
+                        <li>Look for a <strong>bulk-billing GP</strong> (free doctor visit) near you using Google Maps</li>
+                        <li>Call and ask if they accept new patients and have interpreters available</li>
+                        <li>Book an appointment—your first visit is often a free health check</li>
+                    </ul>
+                    <div class="checkbox">
+                        <input type="checkbox" id="task5" onchange="updateTimeline(this, 'item5')">
+                        <label for="task5">Mark this done</label>
+                    </div>
+                </div>
+
+                <div class="timeline-item" id="item6">
+                    <h3>Week 2–3: Get a Myki Card</h3>
+                    <p><strong>Why?</strong> Your ticket for all trams, trains, and buses in Melbourne.</p>
+                    <ul>
+                        <li>Buy a card at any convenience store or supermarket (costs about $6)</li>
+                        <li>Top it up with money (e.g., $20 for about a week of travel)</li>
+                        <li><strong>Tip:</strong> Trams are FREE in the CBD (city center)!</li>
+                    </ul>
+                    <div class="checkbox">
+                        <input type="checkbox" id="task6" onchange="updateTimeline(this, 'item6')">
+                        <label for="task6">Mark this done</label>
+                    </div>
+                </div>
+
+                <div class="timeline-item" id="item7">
+                    <h3>Week 3–4: Meet a Local Migrant Resource Centre</h3>
+                    <p><strong>Why?</strong> They offer free advice, material help (food, clothing), and can connect you to local community.</p>
+                    <p style="color: var(--text-light); margin-top: 1rem;"><em>See the "Key Support Services" section in the app for centres near you.</em></p>
+                    <div class="checkbox">
+                        <input type="checkbox" id="task7" onchange="updateTimeline(this, 'item7')">
+                        <label for="task7">Mark this done</label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Explore Melbourne Section -->
+        <section id="explore" style="margin-bottom: 4rem;">
+            <h2 style="color: var(--primary); margin-bottom: 2rem; font-size: 1.8rem;">🌏 Explore Melbourne - Sightseeing & Activities</h2>
+            <p style="color: var(--text-light); margin-bottom: 2rem; font-size: 1.05rem;">Melbourne is a beautiful, vibrant city with amazing parks, museums, beaches, hiking trails, street art, and cultural experiences. Most are FREE or very cheap! Use public transport to get around easily.</p>
+
+            <div class="tabs" style="margin-bottom: 2rem;">
+                <button class="tab-button active" onclick="openTab(event, 'parks')">Parks & Gardens</button>
+                <button class="tab-button" onclick="openTab(event, 'museums')">Museums & Culture</button>
+                <button class="tab-button" onclick="openTab(event, 'food')">Food & Dining</button>
+                <button class="tab-button" onclick="openTab(event, 'beaches')">Beaches & Hiking</button>
+                <button class="tab-button" onclick="openTab(event, 'neighborhoods')">Neighborhoods</button>
+                <button class="tab-button" onclick="openTab(event, 'sports')">Sports & Recreation</button>
+                <button class="tab-button" onclick="openTab(event, 'events')">Events & Markets</button>
+            </div>
+
+            <!-- Parks & Gardens Tab -->
+            <div id="parks" class="tab-content active">
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>🌳 Royal Botanic Gardens Melbourne</h3>
+                        <p><strong>FREE entry</strong> • 94 acres of beautiful gardens with 8,000+ plant species</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Children's Garden</li>
+                            <li>Aboriginal Heritage Walk</li>
+                            <li>Lake walks and picnic areas</li>
+                            <li>Open daily 7:30 AM – 8:30 PM</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Location:</strong> Birdwood Avenue, Melbourne<br>
+                            <strong>Transport:</strong> Trams 8, 16, 72
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🌲 Fitzroy Gardens</h3>
+                        <p><strong>FREE entry</strong> • 64 acres of historic gardens since 1848</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Beautiful elm-lined avenues</li>
+                            <li>Faeries' Tree (carved gum tree)</li>
+                            <li>Captain Cook's Cottage</li>
+                            <li>Scarred Tree (Aboriginal heritage)</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Location:</strong> Wellington Parade, East Melbourne<br>
+                            <strong>Transport:</strong> Tram 48, 75
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🌺 Queen Victoria Park</h3>
+                        <p><strong>FREE entry</strong> • Historic park with sculptures and botanical displays</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Beautiful walking paths</li>
+                            <li>Floral displays</li>
+                            <li>Picnic areas</li>
+                            <li>Close to city center</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Location:</strong> St Kilda Road, Melbourne
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🌲 Dandenong Ranges National Park</h3>
+                        <p><strong>FREE entry</strong> • Stunning mountain rainforest just 1 hour away</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Fern Gully walking trails</li>
+                            <li>Native bird watching</li>
+                            <li>Picnic areas</li>
+                            <li>Great day trip from city</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Location:</strong> Olinda/Sassafras (East of Melbourne)<br>
+                            <strong>Transport:</strong> Train to Belgrave, then shuttle
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🏞️ Yarra Bend Park</h3>
+                        <p><strong>FREE entry</strong> • Scenic riverside park with walking trails and lookouts</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Beautiful river views</li>
+                            <li>Birdwatching</li>
+                            <li>Picnic spots</li>
+                            <li>Very close to CBD</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Location:</strong> Fairfield, 5km north of CBD<br>
+                            <strong>Transport:</strong> Tram 32, 109
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🌳 Treasury Gardens</h3>
+                        <p><strong>FREE entry</strong> • Historic Victorian gardens near Parliament House</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Tree-lined paths</li>
+                            <li>Peaceful atmosphere</li>
+                            <li>Perfect for relaxation</li>
+                            <li>Close to CBD</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Location:</strong> Spring Street, Melbourne<br>
+                            <strong>Nearest:</strong> Parliament Station
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Museums & Culture Tab -->
+            <div id="museums" class="tab-content">
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>🎨 National Gallery of Victoria (NGV)</h3>
+                        <p><strong>FREE admission</strong> to permanent collection • World-class art from ancient to contemporary</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>International masterpieces</li>
+                            <li>Australian art</li>
+                            <li>Modern & contemporary works</li>
+                            <li>Beautiful architecture</li>
+                        </ul>
+                        <a href="https://www.ngv.vic.gov.au" target="_blank">→ Visit website</a>
+                    </div>
+
+                    <div class="card">
+                        <h3>📚 State Library of Victoria</h3>
+                        <p>Historic building (est. 1854) with free exhibitions, stunning dome, reading rooms</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>FREE exhibitions</li>
+                            <li>Iconic domed reading room</li>
+                            <li>Public library access</li>
+                            <li>Quiet study spaces</li>
+                        </ul>
+                        <a href="https://www.slv.vic.gov.au" target="_blank">→ Visit website</a>
+                    </div>
+
+                    <div class="card">
+                        <h3>🎬 Australian Centre for the Moving Image (ACMI)</h3>
+                        <p><strong>FREE exhibitions</strong> • Film, video, and digital art • Cinema shows indie films (cheap)</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Film exhibitions</li>
+                            <li>Digital art displays</li>
+                            <li>Cinema screenings</li>
+                            <li>Educational programs</li>
+                        </ul>
+                        <a href="https://www.acmi.net.au" target="_blank">→ Visit website</a>
+                    </div>
+
+                    <div class="card">
+                        <h3>🏛️ Melbourne Museum</h3>
+                        <p><strong>$20-30 entry</strong> • Dinosaurs, Aboriginal history, natural science, cultural artifacts</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Dinosaur fossils</li>
+                            <li>Indigenous culture exhibits</li>
+                            <li>Natural history</li>
+                            <li>Interactive displays</li>
+                        </ul>
+                        <a href="https://museumvictoria.com.au" target="_blank">→ Visit website</a>
+                    </div>
+
+                    <div class="card">
+                        <h3>🎭 Art Gallery of Aboriginal Australia and the Pacific</h3>
+                        <p><strong>FREE entry</strong> • Incredible Aboriginal and Pacific Islander art and culture</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Traditional & contemporary art</li>
+                            <li>Cultural storytelling</li>
+                            <li>Educational programs</li>
+                            <li>Beautiful building</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Location:</strong> St Kilda Road
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🎨 Street Art Tours & Lanes</h3>
+                        <p><strong>FREE to explore!</strong> Melbourne's famous street art in laneways is world-class</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Hosier Lane (most famous)</li>
+                            <li>Rutledge Lane</li>
+                            <li>ACDC Lane</li>
+                            <li>Ever-changing artwork</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Location:</strong> CBD lanes between Spring & Swanston Streets
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Food & Dining Tab -->
+            <div id="food" class="tab-content">
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>🍲 Richmond Vietnamese Strip</h3>
+                        <p>Largest Vietnamese community in Australia. Incredible pho, bánh mì, and Vietnamese dishes at LOW PRICES!</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Authentic pho ($8-12)</li>
+                            <li>Bánh mì sandwiches ($4-7)</li>
+                            <li>Fresh spring rolls</li>
+                            <li>100+ restaurants & cafes</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Budget:</strong> $5-12 per meal<br>
+                            <strong>Location:</strong> Victoria Street, Richmond
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🍜 Footscray Food Scene</h3>
+                        <p>Diverse neighbourhood with Italian, Greek, Vietnamese, and Lebanese cuisines. Budget-friendly and AUTHENTIC!</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Greek tavernas</li>
+                            <li>Italian pasta & pizza</li>
+                            <li>Lebanese kebabs</li>
+                            <li>Vietnamese & Chinese options</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Budget:</strong> $6-15 per meal<br>
+                            <strong>Location:</strong> Barkly Street, Footscray
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🏪 Queen Victoria Market</h3>
+                        <p>Iconic 150-year-old market with food stalls, fresh produce, clothes, souvenirs. Amazing value!</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Fresh fruit & vegetables</li>
+                            <li>Cheap street food</li>
+                            <li>Evening food stalls (weekend)</li>
+                            <li>Local & international food</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Budget:</strong> $10-20 for lunch<br>
+                            <strong>Location:</strong> Queen Street, CBD
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🌮 Fitzroy Food Scene</h3>
+                        <p>Hipster & multicultural neighbourhood packed with trendy cafes, restaurants, and street art</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Coffee culture (famous!)</li>
+                            <li>Mexican & Latin food</li>
+                            <li>Vegan & vegetarian cafes</li>
+                            <li>Vintage shops & galleries</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Budget:</strong> $12-20 per meal<br>
+                            <strong>Location:</strong> Brunswick Street, Fitzroy
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🥟 Chinatown & South Melbourne Market</h3>
+                        <p>Amazing Asian cuisine at budget prices • Fresh food court with multiple cuisines</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Dim sum & dumplings</li>
+                            <li>Noodle shops</li>
+                            <li>Food court stalls</li>
+                            <li>Very cheap ($5-10)</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Location:</strong> Little Bourke Street & Prahran Market
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🍻 South Yarra & Chapel Street</h3>
+                        <p>Trendy shopping & dining precinct with restaurants, bars, and international cuisines</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Thai, Italian, Spanish food</li>
+                            <li>Brunch culture</li>
+                            <li>Live music venues</li>
+                            <li>Shopping & nightlife</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Budget:</strong> $15-25 per meal<br>
+                            <strong>Location:</strong> Chapel Street, South Yarra
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Beaches & Hiking Tab -->
+            <div id="beaches" class="tab-content">
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>🏖️ Brighton Beach</h3>
+                        <p>Beautiful beach with famous colorful bathing boxes, just 30 minutes from CBD by train</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Iconic beach boxes (Instagram-famous!)</li>
+                            <li>Swimming beach</li>
+                            <li>Waterfront restaurants</li>
+                            <li>Sandy beach</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Cost:</strong> FREE<br>
+                            <strong>Transport:</strong> Train to Brighton Beach
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🌊 St Kilda Beach</h3>
+                        <p>Popular beach with Luna Park amusement park and bustling promenade</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Swimming beach</li>
+                            <li>Luna Park (rides & fun)</li>
+                            <li>St Kilda Pier & penguins</li>
+                            <li>Restaurants & bars</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Cost:</strong> Beach FREE; Luna Park has entry fee<br>
+                            <strong>Transport:</strong> Tram 16 from CBD
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🏝️ Williamstown Beach</h3>
+                        <p>Charming beach town with historic architecture, waterfront walks, and cafes</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Sandy beach</li>
+                            <li>Historic fort</li>
+                            <li>Waterfront promenade</li>
+                            <li>Scenic views</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Cost:</strong> FREE<br>
+                            <strong>Transport:</strong> Train from CBD (20 mins)
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🚴 Melbourne Bike Paths</h3>
+                        <p>1000+ km of dedicated bike paths throughout city and suburbs</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Yarra River trails</li>
+                            <li>Bayside paths</li>
+                            <li>Mountain bike trails</li>
+                            <li>Scenic routes</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Cost:</strong> FREE paths; $3-5 bike rentals (Melbourne Bike Share)<br>
+                            <strong>Type:</strong> All skill levels
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🌲 Dandenong Ranges & Fern Gully</h3>
+                        <p>Lush rainforest with easy walking trails and native wildlife just 1 hour from city</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Fern Gully walking trail</li>
+                            <li>Native birds & wildlife</li>
+                            <li>Picnic areas</li>
+                            <li>Beautiful rainforest</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Cost:</strong> FREE<br>
+                            <strong>Nearest:</strong> Olinda/Sassafras
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🥾 Grampians National Park</h3>
+                        <p>Stunning mountain range 2 hours away with hiking, views, and Aboriginal art sites</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Scenic walks & hikes</li>
+                            <li>Lookout points</li>
+                            <li>Aboriginal rock art</li>
+                            <li>Picnic facilities</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Cost:</strong> FREE entry<br>
+                            <strong>Location:</strong> Halls Gap (Great Western Highway)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Neighborhoods Tab -->
+            <div id="neighborhoods" class="tab-content">
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>🎭 Fitzroy</h3>
+                        <p>Trendy, multicultural neighbourhood with street art, cafes, vintage shops, and galleries</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Street art & murals</li>
+                            <li>Specialty coffee culture</li>
+                            <li>Vintage & second-hand shops</li>
+                            <li>Live music venues</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Vibe:</strong> Artsy & hipster<br>
+                            <strong>Transport:</strong> Tram 6, 37, 39
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🏠 Collingwood</h3>
+                        <p>Gentrified neighbourhood with new restaurants, craft breweries, and independent shops</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Smith Street dining scene</li>
+                            <li>Craft breweries</li>
+                            <li>Hip restaurants & bars</li>
+                            <li>Footscray Football Club home</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Vibe:</strong> Modern & trendy<br>
+                            <strong>Transport:</strong> Tram 11, 86
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🌳 Carlton</h3>
+                        <p>Bohemian university neighbourhood with Lygon Street's famous Italian restaurants and shops</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Lygon Street (Italian enclave)</li>
+                            <li>Spectrum Migrant Resource Centre</li>
+                            <li>University of Melbourne</li>
+                            <li>Historic architecture</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Vibe:</strong> Student & cultural<br>
+                            <strong>Transport:</strong> Tram 1, 6, 16
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🛍️ South Yarra</h3>
+                        <p>Upmarket neighbourhood with Chapel Street's shopping, dining, and nightlife</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Chapel Street shops & restaurants</li>
+                            <li>High-end fashion</li>
+                            <li>Nightlife & bars</li>
+                            <li>Prahran Market</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Vibe:</strong> Upmarket & trendy<br>
+                            <strong>Transport:</strong> Train to South Yarra
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🌊 St Kilda</h3>
+                        <p>Seaside suburb with beach, Luna Park, pier, and bohemian atmosphere</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Beach & swimming</li>
+                            <li>St Kilda Pier & penguins!</li>
+                            <li>Luna Park amusement park</li>
+                            <li>Vibrant street scene</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Vibe:</strong> Bohemian & beachy<br>
+                            <strong>Transport:</strong> Tram 16 from CBD
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🍽️ Brunswick</h3>
+                        <p>Diverse suburb with Vietnamese restaurants, Middle Eastern food, community spirit</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Cheap Vietnamese & Asian food</li>
+                            <li>Middle Eastern restaurants</li>
+                            <li>Community organizations</li>
+                            <li>Local markets</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Vibe:</strong> Multicultural & friendly<br>
+                            <strong>Transport:</strong> Tram 19 from CBD
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sports & Recreation Tab -->
+            <div id="sports" class="tab-content">
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>🏀 Sports & Recreation Clubs</h3>
+                        <p>Melbourne has hundreds of affordable sporting clubs for all interests</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Soccer/Football clubs</li>
+                            <li>Basketball courts</li>
+                            <li>Tennis clubs</li>
+                            <li>Badminton & volleyball</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Cost:</strong> $5-15/week membership<br>
+                            <strong>Info:</strong> Search "sports clubs [suburb]"
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🏊 Swimming Pools</h3>
+                        <p>Public swimming pools throughout Melbourne at very low cost</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Olympic swimming facilities</li>
+                            <li>Learn to swim classes</li>
+                            <li>Public pools in every suburb</li>
+                            <li>Very cheap ($3-8 entry)</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Cost:</strong> $3-8 per visit<br>
+                            <strong>Find:</strong> Search "aquatic centres [suburb]"
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>⚽ Australian Rules Football</h3>
+                        <p>Experience the world's best footy! Support a local team</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Melbourne teams (9 AFL clubs)</li>
+                            <li>MCG stadium (100,000 capacity!)</li>
+                            <li>Electric atmosphere</li>
+                            <li>Affordable tickets</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Season:</strong> March-September<br>
+                            <strong>Cost:</strong> $15-50 per ticket
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🏌️ Golf Courses</h3>
+                        <p>Many affordable public golf courses throughout Melbourne</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Public & municipal courses</li>
+                            <li>Beginner-friendly</li>
+                            <li>Beautiful courses</li>
+                            <li>Lessons available</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Cost:</strong> $20-40 per round<br>
+                            <strong>Find:</strong> "Public golf courses Melbourne"
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🧘 Yoga & Fitness</h3>
+                        <p>Free & low-cost fitness options throughout the city</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Free outdoor yoga</li>
+                            <li>Community fitness classes</li>
+                            <li>Parks with exercise equipment</li>
+                            <li>Affordable gym memberships</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Cost:</strong> FREE-$10/week<br>
+                            <strong>Find:</strong> Community centres & libraries
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🎿 Water Sports</h3>
+                        <p>Beach & river water sports available year-round</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Surfing lessons</li>
+                            <li>Kayaking & paddleboarding</li>
+                            <li>Swimming at beaches</li>
+                            <li>Rowing clubs</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Cost:</strong> $40-100 for lessons<br>
+                            <strong>Location:</strong> Beaches & Yarra River
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Events & Markets Tab -->
+            <div id="events" class="tab-content">
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>🎪 Melbourne Events Calendar</h3>
+                        <p>Melbourne hosts incredible events year-round! Check what's on:</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Melbourne International Comedy Festival (April)</li>
+                            <li>White Night (biennial)</li>
+                            <li>Melbourne Music Week (November)</li>
+                            <li>Festival of Arts & Culture</li>
+                        </ul>
+                        <a href="https://whatson.melbourne.vic.gov.au" target="_blank">→ What's on in Melbourne</a>
+                    </div>
+
+                    <div class="card">
+                        <h3>🎭 Melbourne Fringe Festival</h3>
+                        <p><strong>September</strong> • Theatre, comedy, dance, art shows across the city</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>100+ shows</li>
+                            <li>Affordable tickets</li>
+                            <li>Diverse performances</li>
+                            <li>International artists</li>
+                        </ul>
+                        <a href="https://www.melbournefringe.com.au" target="_blank">→ Learn more</a>
+                    </div>
+
+                    <div class="card">
+                        <h3>🎵 Live Music Venues</h3>
+                        <p>Melbourne has an incredible live music scene with venues for all genres</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Small bars & pubs with live bands</li>
+                            <li>Large venues (Rod Laver Arena)</li>
+                            <li>Jazz clubs & blues bars</li>
+                            <li>Open mic nights (often FREE)</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Cost:</strong> FREE-$50 depending on venue<br>
+                            <strong>Find:</strong> Check Ticketek or Ticketmaster
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🌍 Multicultural Festivals</h3>
+                        <p>Melbourne celebrates cultural diversity with festivals year-round</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Dragon Boat Festival (Chinese New Year)</li>
+                            <li>Vietnamese Water Festival</li>
+                            <li>Middle Eastern & African festivals</li>
+                            <li>Indian & Hindu celebrations</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Cost:</strong> Usually FREE<br>
+                            <strong>Find:</strong> Community center calendars
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🏪 Farmers Markets</h3>
+                        <p>Weekly farmers markets with fresh produce, local goods, and affordable food</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>South Melbourne Market (daily)</li>
+                            <li>Abbotsford Convent Farmers Market</li>
+                            <li>Collingwood Farmers Market</li>
+                            <li>Cheap fresh vegetables</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Cost:</strong> Browsing FREE; Products $1-5<br>
+                            <strong>Days:</strong> Usually weekends
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>♻️ Trash & Treasure Markets</h3>
+                        <p>Second-hand markets with incredible bargains on clothes, furniture, and more</p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">
+                            <li>Collingwood Children's Farm</li>
+                            <li>Local community markets</li>
+                            <li>Weekend pop-ups</li>
+                            <li>Amazing deals & treasures</li>
+                        </ul>
+                        <div class="contact-info">
+                            <strong>Cost:</strong> $1-10 items<br>
+                            <strong>Find:</strong> "Trash & treasure Melbourne"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Emergency Section -->
+        <section id="emergency" style="margin-bottom: 4rem;">
+            <div class="emergency">
+                <h2>🚨 Emergency & Crisis Support</h2>
+                <p style="margin-bottom: 2rem;">If you're in danger or crisis, help is available 24/7. You're not alone.</p>
+
+                <div class="emergency-contacts">
+                    <div class="emergency-contact">
+                        <h3>🚑 Life-Threatening Emergency</h3>
+                        <p>Call immediately if someone is injured, unconscious, or in danger</p>
+                        <div class="emergency-number">000</div>
+                        <p style="margin-top: 0.5rem; font-size: 0.85rem;">No cost • Available 24/7 • Tell them your location</p>
+                    </div>
+
+                    <div class="emergency-contact">
+                        <h3>🏥 Mental Health Crisis</h3>
+                        <p>Free counselling for depression, anxiety, trauma, or suicidal thoughts</p>
+                        <div class="emergency-number">13 11 14</div>
+                        <p style="margin-top: 0.5rem; font-size: 0.85rem;">Lifeline Australia • 24/7 • Free call</p>
+                    </div>
+
+                    <div class="emergency-contact">
+                        <h3>⚖️ Legal Help</h3>
+                        <p>Free legal advice for immigration, family, or other issues</p>
+                        <div class="emergency-number">(03) 9347 8633</div>
+                        <p style="margin-top: 0.5rem; font-size: 0.85rem;">VCAL Community Legal Services • Interpreters available</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Celebration Modal -->
+    <div class="celebration-modal" id="celebrationModal">
+        <div class="celebration-content">
+            <div class="celebration-emoji">🎉</div>
+            <h2>Amazing Work!</h2>
+            <p>You've completed your first 4-week checklist! You're now well on your way to settling into Melbourne.</p>
+            <p style="font-size: 1rem; margin-top: 1.5rem;">Keep exploring, stay connected with your community, and remember—you've got this! 💪</p>
+            <button class="celebration-button" onclick="closeCelebration()">Continue Exploring</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Refugee Student Settlement Pathway. SkillPath.</p>
+        <p>For more information, visit <a href="https://www.skillpath.org.au/">SkillPath</a></p>
+    </footer>
+
+    <script>
+        // Audio context for celebration music
+        let audioContext;
+
+        function initAudio() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        function playSuccessSound() {
+            initAudio();
+            
+            const now = audioContext.currentTime;
+            const notes = [523, 659, 784, 1047]; // C5, E5, G5, C6
+            
+            notes.forEach((freq, index) => {
+                const osc = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+                
+                osc.connect(gain);
+                gain.connect(audioContext.destination);
+                
+                osc.frequency.value = freq;
+                osc.type = 'sine';
+                
+                gain.gain.setValueAtTime(0.3, now + index * 0.15);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + index * 0.15 + 0.2);
+                
+                osc.start(now + index * 0.15);
+                osc.stop(now + index * 0.15 + 0.2);
+            });
+        }
+
+        function createConfetti() {
+            const modal = document.getElementById('celebrationModal');
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = ['#e85d4e', '#2eccc0', '#f5d4d4', '#1e3a5f'][Math.floor(Math.random() * 4)];
+                confetti.style.animation = `fall ${2 + Math.random() * 1}s linear forwards`;
+                modal.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+
+        // Add animation for confetti
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fall {
+                to {
+                    transform: translateY(600px) rotateZ(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        function openTab(event, tabName) {
+            const tabContents = document.querySelectorAll('.tab-content');
+            const tabButtons = event.target.parentElement.querySelectorAll('.tab-button');
+
+            tabContents.forEach(tab => {
+                if (tab.id === tabName) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function updateTimeline(checkbox, itemId) {
+            const item = document.getElementById(itemId);
+            if (checkbox.checked) {
+                item.classList.add('completed');
+            } else {
+                item.classList.remove('completed');
+            }
+            
+            checkAllCompleted();
+        }
+
+        function checkAllCompleted() {
+            const allCheckboxes = document.querySelectorAll('.checkbox input');
+            const allChecked = Array.from(allCheckboxes).every(cb => cb.checked);
+            
+            if (allChecked) {
+                setTimeout(() => {
+                    playSuccessSound();
+                    createConfetti();
+                    document.getElementById('celebrationModal').classList.add('active');
+                }, 500);
+            }
+        }
+
+        function closeCelebration() {
+            document.getElementById('celebrationModal').classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('celebrationModal').addEventListener('click', (e) => {
+            if (e.target.id === 'celebrationModal') {
+                closeCelebration();
+            }
+        });
+    </script>
+</body>
+</html>
