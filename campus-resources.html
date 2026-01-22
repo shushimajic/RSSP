@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Resources - Refugee Student Settlement Pathway</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes fade-in-up {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes slide-down {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .animate-fade-in {
+      animation: fade-in 0.5s ease-out;
+    }
+    
+    .animate-fade-in-up {
+      animation: fade-in-up 0.8s ease-out;
+    }
+    
+    .animate-slide-down {
+      animation: slide-down 0.3s ease-out;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 via-pink-50 to-teal-50">
+  
+  <!-- Navigation -->
+  <nav class="bg-white shadow-lg sticky top-0 z-40 backdrop-blur-lg bg-opacity-95">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <div class="flex items-center gap-4">
+          <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/1ebcd5a3-9db5-47bd-b470-4f3269e3680e" alt="SkillPath" class="h-12 animate-fade-in">
+          <div class="hidden md:block">
+            <div class="text-sm text-gray-500 font-medium">Refugee Student</div>
+            <div class="text-sm text-gray-500 font-medium">Settlement Pathway</div>
+          </div>
+        </div>
+
+        <!-- Desktop Nav -->
+        <div class="hidden md:flex items-center gap-6">
+          <a href="index.html" class="text-gray-700 hover:text-coral-500 transition-colors font-medium">Home</a>
+          <a href="#security" class="text-gray-700 hover:text-coral-500 transition-colors font-medium">Safety</a>
+          <a href="#health" class="text-gray-700 hover:text-coral-500 transition-colors font-medium">Health</a>
+          <a href="#food" class="text-gray-700 hover:text-coral-500 transition-colors font-medium">Food</a>
+          <a href="#wellness" class="text-gray-700 hover:text-coral-500 transition-colors font-medium">Wellness</a>
+          <a href="#housing" class="text-gray-700 hover:text-coral-500 transition-colors font-medium">Housing</a>
+          
+          <select id="languageSelect" class="px-4 py-2 rounded-lg border-2 border-teal-300 focus:outline-none focus:border-teal-500 transition-all cursor-pointer">
+            <option value="en">🇬🇧 English</option>
+            <option value="vi">🇻🇳 Tiếng Việt</option>
+            <option value="ar">🇸🇦 العربية</option>
+            <option value="fa">🇮🇷 فارسی</option>
+            <option value="zh">🇨🇳 中文</option>
+          </select>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobileMenu" class="hidden md:hidden pb-4 animate-slide-down">
+        <div class="flex flex-col gap-3">
+          <a href="index.html" class="px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors">Home</a>
+          <a href="#security" class="px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors">Safety</a>
+          <a href="#health" class="px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors">Health</a>
+          <a href="#food" class="px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors">Food</a>
+          <a href="#wellness" class="px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors">Wellness</a>
+          <a href="#housing" class="px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors">Housing</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="relative overflow-hidden bg-gradient-to-r from-purple-100 via-blue-100 to-teal-100 py-16 px-4">
+    <div class="max-w-4xl mx-auto text-center animate-fade-in-up">
+      <h1 class="text-5xl md:text-6xl font-bold text-blue-900 mb-4">
+        🎓 Campus Resources
+      </h1>
+      <p class="text-xl md:text-2xl text-gray-700 mb-3">
+        Everything you need to stay safe, healthy, and supported at UniMelb
+      </p>
+      <p class="text-lg text-gray-600">
+        Free services, support programs, and resources designed to help you thrive
+      </p>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 py-12">
+    
+    <!-- Quick Links Card -->
+    <div class="mb-12 bg-gradient-to-r from-orange-100 to-yellow-100 rounded-2xl p-6 shadow-lg border-l-4 border-orange-400 animate-fade-in">
+      <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
+        ⚡ Quick Emergency Contacts
+      </h3>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="bg-white bg-opacity-80 backdrop-blur rounded-xl p-4">
+          <div class="text-sm text-gray-600 mb-1">Life-Threatening Emergency</div>
+          <div class="text-2xl font-bold text-red-600">000</div>
+        </div>
+        <div class="bg-white bg-opacity-80 backdrop-blur rounded-xl p-4">
+          <div class="text-sm text-gray-600 mb-1">Campus Security 24/7</div>
+          <div class="text-xl font-bold text-blue-600">03 8344 6666</div>
+        </div>
+        <div class="bg-white bg-opacity-80 backdrop-blur rounded-xl p-4">
+          <div class="text-sm text-gray-600 mb-1">Mental Health Crisis</div>
+          <div class="text-xl font-bold text-purple-600">13 11 14</div>
+          <div class="text-xs text-gray-500">Lifeline 24/7</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Campus Security Section -->
+    <section id="security" class="mb-16">
+      <h2 class="text-4xl font-bold text-blue-900 mb-8 flex items-center gap-3">
+        <svg class="w-10 h-10 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+        </svg>
+        🛡️ Campus Security & Safety
+      </h2>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- SafeZone App -->
+        <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8 shadow-xl border-2 border-blue-200">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="bg-blue-600 rounded-full p-3">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-800">SafeZone App</h3>
+          </div>
+          
+          <p class="text-lg text-blue-900 font-semibold mb-4">
+            ⭐ MOST IMPORTANT APP TO DOWNLOAD
+          </p>
+          
+          <p class="text-gray-700 mb-4">
+            This app connects you directly to University Security with one tap. It's essential for your safety on campus.
+          </p>
+          
+          <div class="bg-white bg-opacity-80 backdrop-blur rounded-xl p-4 mb-4">
+            <h4 class="font-bold text-gray-800 mb-3">Key Features:</h4>
+            <ul class="space-y-2">
+              <li class="flex items-start gap-2">
+                <span class="text-blue-600 mt-1">✓</span>
+                <span class="text-gray-700"><strong>Help Button:</strong> For non-emergencies (lost, need directions, feel uncomfortable)</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-600 mt-1">✓</span>
+                <span class="text-gray-700"><strong>Check-In Feature:</strong> If studying late or alone, check in so security knows you're there</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-600 mt-1">✓</span>
+                <span class="text-gray-700"><strong>Emergency Button:</strong> Instantly alerts security to your GPS location</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-600 mt-1">✓</span>
+                <span class="text-gray-700"><strong>Friend Walk:</strong> Share your location with friends when walking home</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-blue-600 text-white rounded-xl p-4">
+            <div class="font-semibold mb-2">📱 Download Now:</div>
+            <div class="text-sm">Search "SafeZone" in App Store or Google Play</div>
+          </div>
+        </div>
+
+        <!-- Security Chaperones -->
+        <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-8 shadow-xl border-2 border-purple-200">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="bg-purple-600 rounded-full p-3">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-800">Security Escorts</h3>
+          </div>
+          
+          <p class="text-lg text-purple-900 font-semibold mb-4">
+            FREE Walking Companion Service
+          </p>
+          
+          <p class="text-gray-700 mb-4">
+            If you feel unsafe walking to your car, tram stop, or Carlton accommodation at night, request a security staff member to walk with you.
+          </p>
+          
+          <div class="bg-white bg-opacity-80 backdrop-blur rounded-xl p-4 mb-4">
+            <h4 class="font-bold text-gray-800 mb-3">When to Use:</h4>
+            <ul class="space-y-2">
+              <li class="flex items-start gap-2">
+                <span class="text-purple-600 mt-1">•</span>
+                <span class="text-gray-700">Walking to your car after evening classes</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-purple-600 mt-1">•</span>
+                <span class="text-gray-700">Going to the tram/bus stop late at night</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-purple-600 mt-1">•</span>
+                <span class="text-gray-700">Walking to Carlton student accommodation</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-purple-600 mt-1">•</span>
+                <span class="text-gray-700">Any time you feel uncomfortable or unsafe</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-purple-600 text-white rounded-xl p-4 space-y-2">
+            <div class="font-semibold">📞 Request an Escort:</div>
+            <div class="text-2xl font-bold">03 8344 6666</div>
+            <div class="text-sm opacity-90">Or use the SafeZone app "Help" button</div>
+            <div class="text-sm opacity-90 mt-2">Available 24/7 • Completely FREE</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Health Services Section -->
+    <section id="health" class="mb-16">
+      <h2 class="text-4xl font-bold text-blue-900 mb-8 flex items-center gap-3">
+        <svg class="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+        </svg>
+        🏥 Health Services
+      </h2>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <!-- University Health Service -->
+        <div class="bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300">
+          <h3 class="text-2xl font-bold text-gray-800 mb-4">🩺 University Health Service</h3>
+          <p class="text-lg font-semibold text-green-600 mb-4">FREE GP Appointments!</p>
+          
+          <div class="bg-green-50 rounded-xl p-4 mb-4">
+            <h4 class="font-bold text-gray-800 mb-2">💰 Bulk Billing = $0 Cost</h4>
+            <p class="text-gray-700 text-sm">
+              The University Health Service bulk bills students with valid Medicare or OSHC (Allianz/BUPA). This means <strong>no out-of-pocket cost</strong> for standard GP appointments!
+            </p>
+          </div>
+
+          <ul class="space-y-2 mb-4">
+            <li class="flex items-start gap-2">
+              <span class="text-green-600 mt-1">✓</span>
+              <span class="text-gray-700">General medical consultations</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-600 mt-1">✓</span>
+              <span class="text-gray-700">Vaccinations & travel health</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-600 mt-1">✓</span>
+              <span class="text-gray-700">Women's health services</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-600 mt-1">✓</span>
+              <span class="text-gray-700">Mental health support</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-600 mt-1">✓</span>
+              <span class="text-gray-700">Sexual health & contraception</span>
+            </li>
+          </ul>
+
+          <div class="border-t border-gray-200 pt-4 space-y-2">
+            <div class="text-sm text-gray-700">
+              <strong>📍 Location:</strong> Parkville Campus
+            </div>
+            <div class="text-sm text-gray-700">
+              <strong>📞 Phone:</strong> (03) 8344 6904
+            </div>
+            <div class="text-sm text-gray-700">
+              <strong>🔗 Booking:</strong> HotDoc app or university website
+            </div>
+            <div class="bg-blue-100 rounded-lg p-3 mt-3">
+              <div class="text-sm text-blue-900">
+                <strong>First Visit:</strong> Call (03) 8344 6904 to register as a new patient. After that, book online anytime!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dental Services -->
+        <div class="bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300">
+          <h3 class="text-2xl font-bold text-gray-800 mb-4">🦷 Discounted Dental Care</h3>
+          <p class="text-lg font-semibold text-blue-600 mb-4">15% Student Discount</p>
+          
+          <div class="bg-blue-50 rounded-xl p-4 mb-4">
+            <h4 class="font-bold text-gray-800 mb-2">Melbourne Dental Clinic</h4>
+            <p class="text-gray-700 text-sm mb-2">
+              A teaching clinic where final-year dental students (supervised by expert clinicians) provide care.
+            </p>
+            <p class="text-gray-700 text-sm">
+              <strong>The Trade-Off:</strong> Appointments take longer (2-3 hours), but costs are <strong>significantly cheaper</strong> than private dentists.
+            </p>
+          </div>
+
+          <ul class="space-y-2 mb-4">
+            <li class="flex items-start gap-2">
+              <span class="text-blue-600 mt-1">✓</span>
+              <span class="text-gray-700">General dental check-ups</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-600 mt-1">✓</span>
+              <span class="text-gray-700">Teeth cleaning & scaling</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-600 mt-1">✓</span>
+              <span class="text-gray-700">Fillings & extractions</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-600 mt-1">✓</span>
+              <span class="text-gray-700">Emergency dental care</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-600 mt-1">✓</span>
+              <span class="text-gray-700">Supervised by qualified dentists</span>
+            </li>
+          </ul>
+
+          <div class="border-t border-gray-200 pt-4 space-y-2">
+            <div class="text-sm text-gray-700">
+              <strong>📍 Location:</strong> 720 Swanston St, Carlton
+            </div>
+            <div class="text-sm text-gray-700">
+              <strong>💰 Discount:</strong> 15% off for students
+            </div>
+            <div class="bg-orange-100 rounded-lg p-3 mt-3">
+              <div class="text-sm text-orange-900">
+                <strong>💡 Pro Tip:</strong> Book well in advance! As a teaching clinic, availability can be limited during semester.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mental Health Services -->
+      <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 shadow-xl border-2 border-purple-200">
+        <h3 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+          <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+          </svg>
+          💜 Mental Health Support
+        </h3>
+
+        <!-- CAPS -->
+        <div class="bg-white rounded-xl p-6 mb-6">
+          <h4 class="text-xl font-bold text-purple-700 mb-3">University CAPS (Counselling & Psychological Services)</h4>
+          <p class="text-gray-700 mb-4">
+            Free, confidential, short-term psychological support for all enrolled students.
+          </p>
+
+          <div class="grid md:grid-cols-2 gap-4 mb-4">
+            <div class="bg-purple-50 rounded-lg p-4">
+              <h5 class="font-semibold text-gray-800 mb-2">Services:</h5>
+              <ul class="space-y-1 text-sm text-gray-700">
+                <li>• Individual counseling sessions</li>
+                <li>• Group workshops & programs</li>
+                <li>• Online resources 24/7</li>
+                <li>• Crisis support</li>
+              </ul>
+            </div>
+
+            <div class="bg-purple-50 rounded-lg p-4">
+              <h5 class="font-semibold text-gray-800 mb-2">Key Details:</h5>
+              <ul class="space-y-1 text-sm text-gray-700">
+                <li>• 100% FREE for students</li>
+                <li>• Completely confidential</li>
+                <li>• Not on academic record</li>
+                <li>• Choose your counselor</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-purple-600 text-white rounded-lg p-4">
+            <div class="font-semibold mb-1">How to Book:</div>
+            <div class="text-sm">1. Register online at CAPS website</div>
+            <div class="text-sm">2. Complete initial assessment</div>
+            <div class="text-sm">3. Book appointments through portal</div>
+          </div>
+        </div>
+
+        <!-- External Mental Health Services -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="bg-white rounded-lg p-4 border-2 border-teal-200">
+            <h5 class="font-bold text-gray-800 mb-2">🌟 Headspace</h5>
+            <p class="text-sm text-gray-600 mb-2">FREE for ages 12-25</p>
+            <ul class="text-xs text-gray-700 space-y-1">
+              <li>• Counseling services</li>
+              <li>• Work/study support</li>
+              <li>• GP services</li>
+              <li>• Center in Collingwood</li>
+            </ul>
+          </div>
+
+          <div class="bg-white rounded-lg p-4 border-2 border-blue-200">
+            <h5 class="font-bold text-gray-800 mb-2">💬 MOST Digital</h5>
+            <p class="text-sm text-gray-600 mb-2">FREE ages 15-25</p>
+            <ul class="text-xs text-gray-700 space-y-1">
+              <li>• 1-on-1 online chats</li>
+              <li>• Clinicians & peer workers</li>
+              <li>• Flexible hours</li>
+              <li>• Completely free</li>
+            </ul>
+          </div>
+
+          <div class="bg-white rounded-lg p-4 border-2 border-yellow-200">
+            <h5 class="font-bold text-gray-800 mb-2">📞 Beyond Blue</h5>
+            <p class="text-sm text-gray-600 mb-2">24/7 Support</p>
+            <ul class="text-xs text-gray-700 space-y-1">
+              <li>• Phone: 1300 22 4636</li>
+              <li>• Online webchat</li>
+              <li>• Immediate distress support</li>
+              <li>• Always available</li>
+            </ul>
+          </div>
+
+          <div class="bg-white rounded-lg p-4 border-2 border-green-200">
+            <h5 class="font-bold text-gray-800 mb-2">🎓 Uni Psychology Clinic</h5>
+            <p class="text-sm text-gray-600 mb-2">Low-cost therapy</p>
+            <ul class="text-xs text-gray-700 space-y-1">
+              <li>• Long-term therapy</li>
+              <li>• Sliding scale fees</li>
+              <li>• Postgrad students</li>
+              <li>• Expert supervision</li>
+            </ul>
+          </div>
+
+          <div class="bg-white rounded-lg p-4 border-2 border-pink-200">
+            <h5 class="font-bold text-gray-800 mb-2">🆘 1800RESPECT</h5>
+            <p class="text-sm text-gray-600 mb-2">24/7 Confidential</p>
+            <ul class="text-xs text-gray-700 space-y-1">
+              <li>• Sexual assault support</li>
+              <li>• Domestic violence help</li>
+              <li>• Completely confidential</li>
+              <li>• Phone: 1800 737 732</li>
+            </ul>
+          </div>
+
+          <div class="bg-white rounded-lg p-4 border-2 border-red-200">
+            <h5 class="font-bold text-gray-800 mb-2">☎️ Lifeline</h5>
+            <p class="text-sm text-gray-600 mb-2">Crisis Support 24/7</p>
+            <ul class="text-xs text-gray-700 space-y-1">
+              <li>• Phone: 13 11 14</li>
+              <li>• Text: 0477 13 11 14</li>
+              <li>• Online chat available</li>
+              <li>• FREE & confidential</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Food Relief Section -->
+    <section id="food" class="mb-16">
+      <h2 class="text-4xl font-bold text-blue-900 mb-8 flex items-center gap-3">
+        <svg class="w-10 h-10 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        🍽️ Food Relief & Affordable Eating
+      </h2>
+
+      <!-- Groceries -->
+      <div class="mb-8">
+        <h3 class="text-2xl font-bold text-gray-800 mb-6">🛒 Groceries & Fresh Produce (Cooking at Home)</h3>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all">
+            <h4 class="text-xl font-bold text-gray-800 mb-3">🥕 The Community Grocer</h4>
+            <p class="text-sm text-green-600 font-semibold mb-3">Weekly Affordable Markets • Carlton</p>
+            
+            <ul class="space-y-2 mb-4">
+              <li class="text-sm text-gray-700 flex items-start gap-2">
+                <span class="text-green-500 mt-1">•</span>
+                <span>Fruit & veggie boxes ($20 for large box)</span>
+              </li>
+              <li class="text-sm text-gray-700 flex items-start gap-2">
+                <span class="text-green-500 mt-1">•</span>
+                <span>Collection: Kathleen Syme Library</span>
+              </li>
+              <li class="text-sm text-gray-700 flex items-start gap-2">
+                <span class="text-green-500 mt-1">•</span>
+                <span>Fridays in the afternoon</span>
+              </li>
+            </ul>
+
+            <a href="#" class="inline-block text-coral-500 hover:text-teal-500 font-semibold text-sm">
+              → Order boxes online
+            </a>
+          </div>
+
+          <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all">
+            <h4 class="text-xl font-bold text-gray-800 mb-3">🏪 Queen Victoria Market</h4>
+            <p class="text-sm text-blue-600 font-semibold mb-3">Short Walk from Campus</p>
+            
+            <ul class="space-y-2 mb-4">
+              <li class="text-sm text-gray-700 flex items-start gap-2">
+                <span class="text-blue-500 mt-1">•</span>
+                <span>Much cheaper than supermarkets</span>
+              </li>
+              <li class="text-sm text-gray-700 flex items-start gap-2">
+                <span class="text-blue-500 mt-1">•</span>
+                <span><strong>Best deals:</strong> Sunday afternoons</span>
+              </li>
+              <li class="text-sm text-gray-700 flex items-start gap-2">
+                <span class="text-blue-500 mt-1">•</span>
+                <span>Vendors discount to clear stock</span>
+              </li>
+            </ul>
+
+            <div class="bg-yellow-50 rounded-lg p-3">
+              <p class="text-xs text-yellow-800">💡 Go late on Sundays for best bargains!</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all">
+            <h4 class="text-xl font-bold text-gray-800 mb-3">🏬 Supermarkets</h4>
+            <p class="text-sm text-purple-600 font-semibold mb-3">Compare Prices</p>
+            
+            <ul class="space-y-2 mb-4">
+              <li class="text-sm text-gray-700 flex items-start gap-2">
+                <span class="text-purple-500 mt-1">•</span>
+                <span><strong>Aldi:</strong> Cheapest for basics</span>
+              </li>
+              <li class="text-sm text-gray-700 flex items-start gap-2">
+                <span class="text-purple-500 mt-1">•</span>
+                <span><strong>Coles/Woolworths:</strong> Everywhere</span>
+              </li>
+              <li class="text-sm text-gray-700 flex items-start gap-2">
+                <span class="text-purple-500 mt-1">•</span>
+                <span><strong>IGA:</strong> Different price points</span>
+              </li>
+            </ul>
+
+            <div class="bg-purple-50 rounded-lg p-3">
+              <p class="text-xs text-purple-800">💡 Check weekly specials catalogs</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- On-Campus Food -->
+      <div class="mb-8">
+        <h3 class="text-2xl font-bold text-gray-800 mb-6">🏫 Ready-to-Eat (On Campus)</h3>
+        <div class="grid md:grid-cols-3 gap-6">
+          
+          <div class="bg-gradient-to-br from-teal-50 to-teal-100 rounded-xl p-6 border-2 border-teal-200">
+            <h4 class="text-lg font-bold text-gray-800 mb-2">🍱 Campus Canteen</h4>
+            <p class="text-sm text-teal-700 mb-3">Subsidised low-cost meals during semester</p>
+            <div class="bg-white rounded-lg p-3">
+              <p class="text-xs text-gray-700">Check campus locations for daily specials</p>
+            </div>
+          </div>
+
+          <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-6 border-2 border-orange-200">
+            <h4 class="text-lg font-bold text-gray-800 mb-2">🥐 Carte Crepes</h4>
+            <p class="text-sm text-orange-700 mb-3">Quick meals from $8</p>
+            <div class="bg-white rounded-lg p-3">
+              <p class="text-xs text-gray-700">Popular spot for affordable treats</p>
+            </div>
+          </div>
+
+          <div class="bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl p-6 border-2 border-pink-200">
+            <h4 class="text-lg font-bold text-gray-800 mb-2">🎓 Student Unions</h4>
+            <p class="text-sm text-pink-700 mb-3">FREE lunches & breakfast programs</p>
+            <div class="bg-white rounded-lg p-3">
+              <p class="text-xs text-gray-700">Follow UMSU & GSA on social media</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cheap Eats Near Campus -->
+      <div class="mb-8">
+        <h3 class="text-2xl font-bold text-gray-800 mb-6">🍜 Cheap Eats (Walking Distance)</h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          
+          <div class="bg-white rounded-xl p-6 shadow-lg">
+            <h4 class="text-xl font-bold text-gray-800 mb-3">❤️ Heart of Carlton</h4>
+            <p class="text-lg font-semibold text-red-500 mb-3">Almost Everything $4!</p>
+            
+            <p class="text-gray-700 mb-4">
+              Community-minded cafe where meals, coffee, and snacks are incredibly affordable.
+            </p>
+
+            <div class="bg-red-50 rounded-lg p-4">
+              <p class="text-sm text-gray-700 mb-1"><strong>Price:</strong> $4 per item</p>
+              <p class="text-sm text-gray-700"><strong>Type:</strong> Cafe, meals, coffee, snacks</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl p-6 shadow-lg">
+            <h4 class="text-xl font-bold text-gray-800 mb-3">🍱 Don Tojo</h4>
+            <p class="text-lg font-semibold text-orange-500 mb-3">Large Japanese Bowls</p>
+            
+            <p class="text-gray-700 mb-4">
+              Located on Cardigan St. Known for very affordable, generous Japanese lunch bowls.
+            </p>
+
+            <div class="bg-orange-50 rounded-lg p-4">
+              <p class="text-sm text-gray-700 mb-1"><strong>Price:</strong> $8-12</p>
+              <p class="text-sm text-gray-700"><strong>Location:</strong> Cardigan Street</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Emergency Food Relief -->
+      <div class="bg-gradient-to-r from-red-50 to-orange-50 rounded-2xl p-8 border-2 border-red-200">
+        <h3 class="text-2xl font-bold text-gray-800 mb-4">🆘 Emergency Food Relief</h3>
+        
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white rounded-xl p-6">
+            <h4 class="font-bold text-gray-800 mb-3">🎓 UniMelb Food Relief</h4>
+            <p class="text-gray-700 mb-3">
+              The university maintains a central list of food pantries, vouchers, and immediate support for students in need.
+            </p>
+            <a href="#" class="inline-block bg-red-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors text-sm">
+              Access Resources →
+            </a>
+          </div>
+
+          <div class="bg-white rounded-xl p-6">
+            <h4 class="font-bold text-gray-800 mb-3">📚 Public Library Lunches</h4>
+            <p class="text-gray-700 mb-3">
+              Several local libraries run FREE community lunches. Example: North Fitzroy hosts Saturday lunch.
+            </p>
+            <a href="#" class="inline-block bg-orange-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-orange-700 transition-colors text-sm">
+              Find Lunches →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Wellness Section -->
+    <section id="wellness" class="mb-16">
+      <h2 class="text-4xl font-bold text-blue-900 mb-8 flex items-center gap-3">
+        <svg class="w-10 h-10 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        🏊‍♀️ Lifestyle & Wellness
+      </h2>
+
+      <div class="bg-gradient-to-br from-blue-50 to-teal-50 rounded-2xl p-8 shadow-xl border-2 border-teal-200">
+        <h3 class="text-2xl font-bold text-gray-800 mb-6">Swimming (Women's Only Programs)</h3>
+        
+        <p class="text-gray-700 mb-6">
+          Several facilities around Melbourne offer women-only swimming sessions with female-only staff, ideal for those with cultural or religious requirements.
+        </p>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <div class="bg-white rounded-xl p-6 shadow-lg">
+            <h4 class="text-lg font-bold text-gray-800 mb-3">🏊 Melbourne Uni Sport</h4>
+            <p class="text-sm text-blue-600 font-semibold mb-3">Beaurepaire Centre</p>
+            
+            <ul class="space-y-2 text-sm text-gray-700">
+              <li class="flex items-start gap-2">
+                <span class="text-teal-500">•</span>
+                <span>Periodic women-only swim nights</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-teal-500">•</span>
+                <span>Check schedule on website</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-teal-500">•</span>
+                <span>On-campus convenience</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-white rounded-xl p-6 shadow-lg">
+            <h4 class="text-lg font-bold text-gray-800 mb-3">💙 Active Merri-bek</h4>
+            <p class="text-sm text-purple-600 font-semibold mb-3">Local Council Pools</p>
+            
+            <ul class="space-y-2 text-sm text-gray-700 mb-3">
+              <li class="flex items-start gap-2">
+                <span class="text-purple-500">•</span>
+                <span>Women-only Friday evenings</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-purple-500">•</span>
+                <span>6:30 PM – 8:00 PM</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-purple-500">•</span>
+                <span>Regular weekly sessions</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-white rounded-xl p-6 shadow-lg border-2 border-teal-300">
+            <h4 class="text-lg font-bold text-gray-800 mb-3">⭐ Sunshine Leisure Centre</h4>
+            <p class="text-sm text-teal-600 font-semibold mb-3">Highly Regarded Program</p>
+            
+            <ul class="space-y-2 text-sm text-gray-700 mb-3">
+              <li class="flex items-start gap-2">
+                <span class="text-teal-500">•</span>
+                <span><strong>Sunday evenings:</strong> 5:00 PM – 7:00 PM</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-teal-500">•</span>
+                <span>Female-only staff members</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-teal-500">•</span>
+                <span>Culturally sensitive environment</span>
+              </li>
+            </ul>
+
+            <div class="bg-teal-50 rounded-lg p-3">
+              <p class="text-xs text-teal-800">
+                <strong>Ideal for:</strong> Cultural or religious requirements
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Housing Section -->
+    <section id="housing" class="mb-16">
+      <h2 class="text-4xl font-bold text-blue-900 mb-8 flex items-center gap-3">
+        <svg class="w-10 h-10 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+        </svg>
+        🏠 Housing & Accommodation
+      </h2>
+
+      <div class="bg-white rounded-2xl p-8 shadow-xl">
+        <h3 class="text-2xl font-bold text-gray-800 mb-6">Finding Flatmates & Housing</h3>
+        
+        <div class="grid md:grid-cols-2 gap-6">
+          
+          <div class="bg-gradient-to-br from-pink-50 to-purple-50 rounded-xl p-6 border-2 border-pink-200">
+            <h4 class="text-xl font-bold text-gray-800 mb-4">📱 Fairyfloss Real Estate</h4>
+            <p class="text-gray-700 mb-4">
+              The go-to Facebook group for finding shared housing in Melbourne. Very popular with students!
+            </p>
+
+            <ul class="space-y-2 mb-4">
+              <li class="text-sm text-gray-700 flex items-start gap-2">
+                <span class="text-pink-500 mt-1">•</span>
+                <span>Active student community</span>
+              </li>
+              <li class="text-sm text-gray-700 flex items-start gap-2">
+                <span class="text-pink-500 mt-1">•</span>
+                <span>Rooms in shared houses</span>
+              </li>
+              <li class="text-sm text-gray-700 flex items-start gap-2">
+                <span class="text-pink-500 mt-1">•</span>
+                <span>Various price ranges</span>
+              </li>
+            </ul>
+
+            <div class="bg-red-100 rounded-lg p-4">
+              <p class="text-sm text-red-900 font-semibold mb-2">⚠️ Scam Warning:</p>
+              <p class="text-xs text-red-800">
+                <strong>NEVER</strong> pay money before seeing a room in person. Legitimate landlords will arrange viewings.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-gradient-to-br from-blue-50 to-teal-50 rounded-xl p-6 border-2 border-blue-200">
+            <h4 class="text-xl font-bold text-gray-800 mb-4">🏘️ Flatmates.com.au</h4>
+            <p class="text-gray-700 mb-4">
+              Australia's #1 flatmate finding website. Browse available rooms and post your own listings.
+            </p>
+
+            <ul class="space-y-2 mb-4">
+              <li class="text-sm text-gray-700 flex items-start gap-2">
+                <span class="text-blue-500 mt-1">•</span>
+                <span>Verified listings</span>
+              </li>
+              <li class="text-sm text-gray-700 flex items-start gap-2">
+                <span class="text-blue-500 mt-1">•</span>
+                <span>Detailed profiles</span>
+              </li>
+              <li class="text-sm text-gray-700 flex items-start gap-2">
+                <span class="text-blue-500 mt-1">•</span>
+                <span>Safety ratings & reviews</span>
+              </li>
+            </ul>
+
+            <a href="https://flatmates.com.au" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+              Visit Flatmates →
+            </a>
+          </div>
+        </div>
+
+        <div class="mt-8 bg-yellow-50 rounded-xl p-6 border-2 border-yellow-300">
+          <h4 class="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">
+            <svg class="w-6 h-6 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+            </svg>
+            💡 Housing Search Timeline & Tips
+          </h4>
+          
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <h5 class="font-semibold text-gray-800 mb-2">Timeline:</h5>
+              <ul class="space-y-1 text-sm text-gray-700">
+                <li>• Start looking <strong>3 months before</strong> your lease ends</li>
+                <li>• Melbourne's rental market is very competitive</li>
+                <li>• Be prepared to act quickly on good listings</li>
+              </ul>
+            </div>
+
+            <div>
+              <h5 class="font-semibold text-gray-800 mb-2">Safety Tips:</h5>
+              <ul class="space-y-1 text-sm text-gray-700">
+                <li>• Always view property in person</li>
+                <li>• Meet potential flatmates before committing</li>
+                <li>• Check landlord/agent is legitimate</li>
+                <li>• Get everything in writing</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-blue-900 text-white py-12 px-4">
+    <div class="max-w-7xl mx-auto text-center">
+      <p class="text-lg mb-2">© 2026 Refugee Student Settlement Pathway • SkillPath</p>
+      <p class="text-blue-300">
+        For more information, visit
+        <a href="https://www.skillpath.org.au" class="text-teal-300 hover:underline">skillpath.org.au</a>
+      </p>
+      <div class="mt-6 flex justify-center gap-4">
+        <svg class="w-5 h-5 text-teal-300" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+        </svg>
+        <span class="text-sm text-blue-200">Built with ❤️ for our community</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    });
+
+    // Language selection
+    document.getElementById('languageSelect').addEventListener('change', async (e) => {
+      try {
+        await window.storage.set('language', e.target.value);
+      } catch (err) {
+        console.log('Could not save language preference');
+      }
+    });
+
+    // Load saved language preference
+    async function loadLanguage() {
+      try {
+        const langData = await window.storage.get('language').catch(() => null);
+        if (langData?.value) {
+          document.getElementById('languageSelect').value = langData.value;
+        }
+      } catch (error) {
+        console.log('No saved language preference');
+      }
+    }
+
+    loadLanguage();
+  </script>
+</body>
+</html>
