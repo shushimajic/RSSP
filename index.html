@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Melbourne - Refugee Student Settlement Pathway</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes fade-in-up {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes bounce-in {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes slide-down {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .animate-fade-in {
+      animation: fade-in 0.5s ease-out;
+    }
+    
+    .animate-fade-in-up {
+      animation: fade-in-up 0.8s ease-out;
+    }
+    
+    .animate-bounce-in {
+      animation: bounce-in 0.6s ease-out;
+    }
+    
+    .animate-slide-down {
+      animation: slide-down 0.3s ease-out;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 via-pink-50 to-teal-50">
+  
+  <!-- Celebration Modal -->
+  <div id="celebrationModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 animate-fade-in">
+    <div class="bg-white rounded-3xl p-12 max-w-md text-center animate-bounce-in shadow-2xl">
+      <div class="text-8xl mb-6 animate-bounce">🎉</div>
+      <h2 class="text-4xl font-bold text-blue-900 mb-4">Amazing Work!</h2>
+      <p class="text-gray-600 text-lg mb-6">
+        You've completed your first 4-week checklist! You're now well on your way to settling into Melbourne.
+      </p>
+      <p class="text-gray-500 mb-8">Keep going - you've got this! 💪</p>
+      <button onclick="closeCelebration()" class="bg-gradient-to-r from-teal-400 to-blue-500 text-white px-8 py-4 rounded-xl font-semibold hover:scale-105 transition-transform shadow-lg">
+        Continue Exploring
+      </button>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="bg-white shadow-lg sticky top-0 z-40 backdrop-blur-lg bg-opacity-95">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <div class="flex items-center gap-4">
+          <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/1ebcd5a3-9db5-47bd-b470-4f3269e3680e" alt="SkillPath" class="h-12 animate-fade-in">
+          <div class="hidden md:block">
+            <div class="text-sm text-gray-500 font-medium">Refugee Student</div>
+            <div class="text-sm text-gray-500 font-medium">Settlement Pathway</div>
+          </div>
+        </div>
+
+        <!-- Desktop Nav -->
+        <div class="hidden md:flex items-center gap-6">
+  	  <a href="#checklist" class="text-gray-700 hover:text-coral-500 transition-colors font-medium">Checklist</a>
+  	  <a href="#explore" class="text-gray-700 hover:text-coral-500 transition-colors font-medium">Explore</a>
+  	  <a href="#services" class="text-gray-700 hover:text-coral-500 transition-colors font-medium">Services</a>
+  	  <a href="campus-resources.html" class="text-gray-700 hover:text-coral-500 transition-colors font-medium">Campus Resources</a> <!-- ADD THIS LINE -->
+  	  <a href="#apps" class="text-gray-700 hover:text-coral-500 transition-colors font-medium">Apps</a>
+  	  <a href="#news" class="text-gray-700 hover:text-coral-500 transition-colors font-medium">News</a>
+  	  <a href="#emergency" class="text-gray-700 hover:text-coral-500 transition-colors font-medium">Help</a>
+  
+  	  <select id="languageSelect" class="px-4 py-2 rounded-lg border-2 border-teal-300 focus:outline-none focus:border-teal-500 transition-all cursor-pointer">
+            <option value="en">🇬🇧 English</option>
+            <option value="vi">🇻🇳 Tiếng Việt</option>
+            <option value="ar">🇸🇦 العربية</option>
+            <option value="fa">🇮🇷 فارسی</option>
+            <option value="zh">🇨🇳 中文</option>
+          </select>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobileMenu" class="hidden md:hidden pb-4 animate-slide-down">
+        <div class="flex flex-col gap-3">
+          <a href="#checklist" class="px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors">Checklist</a>
+          <a href="#explore" class="px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors">Explore</a>
+          <a href="#services" class="px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors">Services</a>
+          <a href="campus-resources.html" class="px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors">Campus Resources</a> \
+          <a href="#apps" class="px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors">Apps</a>
+          <a href="#news" class="px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors">News</a>
+          <a href="#emergency" class="px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors">Help</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="relative overflow-hidden bg-gradient-to-r from-blue-100 via-pink-100 to-teal-100 py-20 px-4">
+    <div class="max-w-4xl mx-auto text-center animate-fade-in-up">
+      <h1 class="text-5xl md:text-6xl font-bold text-blue-900 mb-4">
+        Welcome to Melbourne! 🎉
+      </h1>
+      <p class="text-xl md:text-2xl text-gray-700 mb-3">
+        You're starting a new chapter. Let's make your first steps easier together.
+      </p>
+      <p class="text-lg text-gray-600">
+        This guide will help you get settled with everything you need to know.
+      </p>
+      
+      <!-- Quick Stats -->
+      <div class="grid grid-cols-2 gap-4 mt-12 max-w-2xl mx-auto">
+        <div class="bg-white bg-opacity-80 backdrop-blur rounded-2xl p-4 shadow-lg hover:scale-105 transition-transform">
+          <div class="text-3xl font-bold text-coral-500" id="completedCount">0/7</div>
+          <div class="text-sm text-gray-600">Your Progress</div>
+        </div>
+        <div class="bg-white bg-opacity-80 backdrop-blur rounded-2xl p-4 shadow-lg hover:scale-105 transition-transform">
+          <div class="text-3xl font-bold text-pink-500" id="progressPercent">0%</div>
+          <div class="text-sm text-gray-600">Complete</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 py-12">
+    <!-- Encouragement Widget -->
+    <div class="mb-8 bg-gradient-to-r from-yellow-100 to-orange-100 rounded-2xl p-6 shadow-lg border-l-4 border-yellow-400 animate-fade-in">
+      <div class="flex items-center gap-3 mb-2">
+        <svg class="w-6 h-6 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+        </svg>
+        <h3 class="text-xl font-semibold text-gray-800">You're doing great! Keep going! 🌟</h3>
+      </div>
+      <div class="flex items-start gap-3">
+        <svg class="w-5 h-5 text-blue-600 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+        </svg>
+        <div>
+          <div class="font-medium text-gray-700 mb-1">Tip of the Day:</div>
+          <div class="text-gray-600" id="tipOfDay">Free trams in the CBD! No Myki needed in the city center.</div>
+        </div>
+      </div>
+    </div>
+    <!-- Campus Resources Feature Card -->
+<div class="mb-8 bg-gradient-to-r from-purple-100 to-blue-100 rounded-2xl p-6 shadow-lg border-l-4 border-purple-400 animate-fade-in">
+  <div class="flex items-center gap-3 mb-3">
+    <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+    </svg>
+    <h3 class="text-2xl font-semibold text-gray-800">🎓 New: Campus Resources Guide</h3>
+  </div>
+  <p class="text-gray-700 mb-4">
+    Access important information about campus safety, health services, affordable food options, mental health support, and more!
+  </p>
+  <a href="campus-resources.html" class="inline-block bg-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-purple-700 transition-all hover:scale-105 shadow-lg">
+    Explore Campus Resources →
+  </a>
+</div>
+    <!-- Progress Dashboard -->
+    <div class="mb-12 bg-white rounded-2xl p-8 shadow-xl">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-3xl font-bold text-blue-900 flex items-center gap-3">
+          <svg class="w-8 h-8 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+          </svg>
+          Your Progress
+        </h2>
+      </div>
+      
+      <div class="mb-6">
+        <div class="flex justify-between text-sm text-gray-600 mb-2">
+          <span id="progressText">0 of 7 completed</span>
+          <span id="progressPercentText">0%</span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+          <div id="progressBar" class="h-full bg-gradient-to-r from-teal-400 to-blue-500 rounded-full transition-all duration-500 ease-out" style="width: 0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Checklist Section -->
+    <section id="checklist" class="mb-16">
+      <h2 class="text-4xl font-bold text-blue-900 mb-8 flex items-center gap-3">
+        <svg class="w-10 h-10 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        📋 Your First 4 Weeks Checklist
+      </h2>
+      <p class="text-gray-600 mb-8 text-lg">
+        Click each task to mark it complete! Take your time—you don't need to do everything at once! 🌟
+      </p>
+
+      <div id="checklistContainer" class="space-y-6"></div>
+    </section>
+
+    <!-- Explore Melbourne Section -->
+    <section id="explore" class="mb-16">
+      <h2 class="text-4xl font-bold text-blue-900 mb-4 flex items-center gap-3">
+        <svg class="w-10 h-10 text-coral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+        </svg>
+        🌏 Explore Melbourne
+      </h2>
+      <p class="text-gray-600 mb-8 text-lg">
+        Melbourne is beautiful, vibrant, and welcoming! Most attractions are FREE or very cheap. Click the heart to save your favorites! ❤️
+      </p>
+
+      <!-- Category Tabs -->
+      <div class="flex gap-3 mb-8 overflow-x-auto pb-2">
+        <button onclick="setActiveTab('parks')" id="tab-parks" class="px-6 py-3 rounded-xl font-semibold whitespace-nowrap transition-all bg-gradient-to-r from-coral-500 to-pink-500 text-white shadow-lg scale-105">
+          Parks
+        </button>
+        <button onclick="setActiveTab('museums')" id="tab-museums" class="px-6 py-3 rounded-xl font-semibold whitespace-nowrap transition-all bg-white text-gray-700 hover:bg-gray-100">
+          Museums
+        </button>
+        <button onclick="setActiveTab('food')" id="tab-food" class="px-6 py-3 rounded-xl font-semibold whitespace-nowrap transition-all bg-white text-gray-700 hover:bg-gray-100">
+          Food
+        </button>
+        <button onclick="setActiveTab('beaches')" id="tab-beaches" class="px-6 py-3 rounded-xl font-semibold whitespace-nowrap transition-all bg-white text-gray-700 hover:bg-gray-100">
+          Beaches
+        </button>
+        <button onclick="setActiveTab('neighborhoods')" id="tab-neighborhoods" class="px-6 py-3 rounded-xl font-semibold whitespace-nowrap transition-all bg-white text-gray-700 hover:bg-gray-100">
+          Neighborhoods
+        </button>
+        <button onclick="setActiveTab('sports')" id="tab-sports" class="px-6 py-3 rounded-xl font-semibold whitespace-nowrap transition-all bg-white text-gray-700 hover:bg-gray-100">
+          Sports
+        </button>
+        <button onclick="setActiveTab('events')" id="tab-events" class="px-6 py-3 rounded-xl font-semibold whitespace-nowrap transition-all bg-white text-gray-700 hover:bg-gray-100">
+          Events
+        </button>
+      </div>
+
+      <!-- Places Grid -->
+      <div id="exploreGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="mb-16">
+      <h2 class="text-4xl font-bold text-blue-900 mb-8">🤝 Key Support Services</h2>
+      <p class="text-gray-600 mb-8 text-lg">
+        Connect with trusted organisations that can help you settle into Melbourne.
+      </p>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+          <h3 class="text-xl font-bold text-gray-800 mb-3">🏠 AMES Australia</h3>
+          <p class="text-gray-600 mb-4 font-semibold">Accommodation • English Classes • Job Training</p>
+          
+          <ul class="space-y-1 mb-4">
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Temporary & permanent housing assistance</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Free English language classes</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Job readiness & employment support</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Community programs & social activities</span>
+            </li>
+          </ul>
+          
+          <div class="text-sm text-gray-700 mt-4 pt-4 border-t border-gray-200 space-y-1">
+            <div><strong>Phone:</strong> 1800 257 267</div>
+            <div>
+              <a href="https://www.ames.net.au" target="_blank" rel="noopener noreferrer" class="text-coral-500 hover:text-teal-500 font-semibold transition-colors">
+                → Visit website
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+          <h3 class="text-xl font-bold text-gray-800 mb-3">🏘️ Uniting Vic.Tas</h3>
+          <p class="text-gray-600 mb-4 font-semibold">Housing • Food • Community Support</p>
+          
+          <ul class="space-y-1 mb-4">
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Emergency & transitional housing</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Food & material assistance</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Case management support</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Community connection programs</span>
+            </li>
+          </ul>
+          
+          <div class="text-sm text-gray-700 mt-4 pt-4 border-t border-gray-200 space-y-1">
+            <div><strong>Phone:</strong> (03) 8873 6500</div>
+            <div>
+              <a href="https://www.unitingvictas.org.au" target="_blank" rel="noopener noreferrer" class="text-coral-500 hover:text-teal-500 font-semibold transition-colors">
+                → Visit website
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+          <h3 class="text-xl font-bold text-gray-800 mb-3">🎓 SkillPath</h3>
+          <p class="text-gray-600 mb-4 font-semibold">Tertiary Education • Student Settlement</p>
+          
+          <ul class="space-y-1 mb-4">
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>University & TAFE pathway support</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Scholarship information & guidance</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Peer mentoring & community events</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Career development support</span>
+            </li>
+          </ul>
+          
+          <div class="text-sm text-gray-700 mt-4 pt-4 border-t border-gray-200 space-y-1">
+            <div><strong>Email:</strong> info@skillpath.org.au</div>
+            <div>
+              <a href="https://www.skillpath.org.au" target="_blank" rel="noopener noreferrer" class="text-coral-500 hover:text-teal-500 font-semibold transition-colors">
+                → Visit website
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+          <h3 class="text-xl font-bold text-gray-800 mb-3">📚 Spectrum Migrant Resource Centre</h3>
+          <p class="text-gray-600 mb-4 font-semibold">Information • Advice • Community Support</p>
+          
+          <ul class="space-y-1 mb-4">
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Free settlement advice</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Employment assistance</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Housing information</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Community programs & social groups</span>
+            </li>
+          </ul>
+          
+          <div class="text-sm text-gray-700 mt-4 pt-4 border-t border-gray-200 space-y-1">
+            <div><strong>Phone:</strong> (03) 9349 2272</div>
+            <div><strong>Location:</strong> Carlton (Lygon Street)</div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+          <h3 class="text-xl font-bold text-gray-800 mb-3">⚖️ Victorian Refugee Legal Service</h3>
+          <p class="text-gray-600 mb-4 font-semibold">Free Legal Advice • Immigration Support</p>
+          
+          <ul class="space-y-1 mb-4">
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Immigration advice & representation</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Family law matters</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Tenancy & housing disputes</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>General legal advice</span>
+            </li>
+          </ul>
+          
+          <div class="text-sm text-gray-700 mt-4 pt-4 border-t border-gray-200 space-y-1">
+            <div><strong>Phone:</strong> (03) 9652 6666</div>
+            <div>
+              <a href="https://www.vrlcs.org.au" target="_blank" rel="noopener noreferrer" class="text-coral-500 hover:text-teal-500 font-semibold transition-colors">
+                → Visit website
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+          <h3 class="text-xl font-bold text-gray-800 mb-3">🏥 Asylum Seeker Resource Centre</h3>
+          <p class="text-gray-600 mb-4 font-semibold">Health • Food • Mental Health Support</p>
+          
+          <ul class="space-y-1 mb-4">
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Free primary healthcare</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Mental health counselling</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Food & emergency material aid</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Community activities & groups</span>
+            </li>
+          </ul>
+          
+          <div class="text-sm text-gray-700 mt-4 pt-4 border-t border-gray-200 space-y-1">
+            <div><strong>Phone:</strong> (03) 8413 0500</div>
+            <div>
+              <a href="https://www.asrc.org.au" target="_blank" rel="noopener noreferrer" class="text-coral-500 hover:text-teal-500 font-semibold transition-colors">
+                → Visit website
+              </a>
+            </div>
+          </div>
+        </div>
+
+	<div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+          <h3 class="text-xl font-bold text-gray-800 mb-3">💰 Good Shepherd</h3>
+          <p class="text-gray-600 mb-4 font-semibold">No Interest Loans • Financial Support</p>
+          
+          <ul class="space-y-1 mb-4">
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>No Interest Loan Scheme (NILS)</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Loans up to $3,000 for essentials</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>No fees, no interest, no credit checks</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>For household items, medical, education</span>
+            </li>
+          </ul>
+          
+         <div class="text-sm text-gray-700 mt-4 pt-4 border-t border-gray-200 space-y-1">
+           <div><strong>Phone:</strong> 13 NILS (13 6457)</div>
+           <div>
+             <a href="https://goodshep.org.au/services/nils/" target="_blank" rel="noopener noreferrer" class="text-coral-500 hover:text-teal-500 font-semibold transition-colors">
+               → Visit website
+             </a>
+           </div>
+         </div>
+      </div>
+    </section>
+
+    <!-- Careers Section -->
+    <section id="careers" class="mb-16">
+      <h2 class="text-4xl font-bold text-blue-900 mb-8">💼 Career & Employment</h2>
+      <p class="text-gray-600 mb-8 text-lg">
+        Start your career journey in Australia with organisations and platforms that can help you find meaningful employment and build your career.
+      </p>
+
+      <!-- Refugee-Specific Programs -->
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+          <span>🤝</span> Employment Programs
+        </h3>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+            <h4 class="text-xl font-bold text-gray-800 mb-3">🚀 CareerSeekers</h4>
+            <p class="text-gray-600 mb-4 font-semibold">Internships • Career Advice • Employment</p>
+            
+            <ul class="space-y-1 mb-4">
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Paid 12-week internship placements</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Professional career guidance</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Resume & interview preparation</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Network with top employers</span>
+              </li>
+            </ul>
+            
+            <div class="text-sm text-gray-700 mt-4 pt-4 border-t border-gray-200 space-y-1">
+              <div><strong>Email:</strong> hello@careerseekers.org.au</div>
+              <div>
+                <a href="https://careerseekers.org.au" target="_blank" rel="noopener noreferrer" class="text-coral-500 hover:text-teal-500 font-semibold transition-colors">
+                  → Visit website
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+            <h4 class="text-xl font-bold text-gray-800 mb-3">🎯 Brotherhood of St Laurence</h4>
+            <p class="text-gray-600 mb-4 font-semibold">Job Training • Employment Support</p>
+            
+            <ul class="space-y-1 mb-4">
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Employment programs</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Skills training & workshops</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Job placement assistance</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Workplace mentoring</span>
+              </li>
+            </ul>
+            
+            <div class="text-sm text-gray-700 mt-4 pt-4 border-t border-gray-200 space-y-1">
+              <div><strong>Phone:</strong> (03) 9483 1183</div>
+              <div>
+                <a href="https://www.bsl.org.au" target="_blank" rel="noopener noreferrer" class="text-coral-500 hover:text-teal-500 font-semibold transition-colors">
+                  → Visit website
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+            <h4 class="text-xl font-bold text-gray-800 mb-3">💼 AMES Employment Services</h4>
+            <p class="text-gray-600 mb-4 font-semibold">Job Matching • Skills Assessment</p>
+            
+            <ul class="space-y-1 mb-4">
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Skills recognition & assessment</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Job search workshops</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Employer connections</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Ongoing employment support</span>
+              </li>
+            </ul>
+            
+            <div class="text-sm text-gray-700 mt-4 pt-4 border-t border-gray-200 space-y-1">
+              <div><strong>Phone:</strong> 1800 257 267</div>
+              <div>
+                <a href="https://www.ames.net.au/get-involved/careers-ames-australia" target="_blank" rel="noopener noreferrer" class="text-coral-500 hover:text-teal-500 font-semibold transition-colors">
+                  → Visit website
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- University of Melbourne Resources -->
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+          <span>🎓</span> University of Melbourne Career Services
+        </h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 border-2 border-blue-200">
+            <h4 class="text-xl font-bold text-gray-800 mb-3">🎯 Careers Connect (UniMelb)</h4>
+            <p class="text-gray-600 mb-4 font-semibold">Career Counseling • Job Board • Workshops</p>
+            
+            <ul class="space-y-1 mb-4">
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-blue-500 mt-1">•</span>
+                <span>Free 1-on-1 career counseling for students</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-blue-500 mt-1">•</span>
+                <span>Exclusive student job board</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-blue-500 mt-1">•</span>
+                <span>Resume & cover letter reviews</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-blue-500 mt-1">•</span>
+                <span>Interview preparation workshops</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-blue-500 mt-1">•</span>
+                <span>Career events & employer networking</span>
+              </li>
+            </ul>
+            
+            <div class="text-sm text-gray-700 mt-4 pt-4 border-t border-blue-300 space-y-1">
+              <div class="text-blue-700 font-semibold">📍 Book via Career Connect portal</div>
+              <div>
+                <a href="https://careers.unimelb.edu.au" target="_blank" rel="noopener noreferrer" class="text-coral-500 hover:text-teal-500 font-semibold transition-colors">
+                  → Visit Careers Connect
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 border-2 border-purple-200">
+            <h4 class="text-xl font-bold text-gray-800 mb-3">💼 Students@Work (UniMelb)</h4>
+            <p class="text-gray-600 mb-4 font-semibold">On-Campus Jobs • Casual Work</p>
+            
+            <ul class="space-y-1 mb-4">
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-purple-500 mt-1">•</span>
+                <span>Casual jobs on campus</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-purple-500 mt-1">•</span>
+                <span>Flexible hours around classes</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-purple-500 mt-1">•</span>
+                <span>Library, admin, research assistant roles</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-purple-500 mt-1">•</span>
+                <span>Gain local work experience</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-purple-500 mt-1">•</span>
+                <span>Build your Australian resume</span>
+              </li>
+            </ul>
+            
+            <div class="text-sm text-gray-700 mt-4 pt-4 border-t border-purple-300 space-y-1">
+              <div class="text-purple-700 font-semibold">💡 Great first job in Australia!</div>
+              <div>
+                <a href="https://students.unimelb.edu.au/careers/find-a-job/working-on-campus/students@work-internship-program" target="_blank" rel="noopener noreferrer" class="text-coral-500 hover:text-teal-500 font-semibold transition-colors">
+                  → Visit Students@Work
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- General Job Search Platforms -->
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+          <span>🔍</span> Job Search Platforms
+        </h3>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+            <h4 class="text-xl font-bold text-gray-800 mb-3">💼 LinkedIn</h4>
+            <p class="text-gray-600 mb-4 font-semibold">Professional Network • Job Search</p>
+            
+            <ul class="space-y-1 mb-4">
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Create a professional profile (FREE)</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Search thousands of jobs</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Connect with recruiters & employers</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Join industry groups & communities</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Take free online courses</span>
+              </li>
+            </ul>
+            
+            <div class="text-sm text-gray-700 mt-4 pt-4 border-t border-gray-200 space-y-1">
+              <div class="text-blue-600 font-semibold">💡 Tip: Add "Open to Work" badge!</div>
+              <div>
+                <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" class="text-coral-500 hover:text-teal-500 font-semibold transition-colors">
+                  → Visit LinkedIn
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+            <h4 class="text-xl font-bold text-gray-800 mb-3">🔎 SEEK</h4>
+            <p class="text-gray-600 mb-4 font-semibold">Australia's #1 Job Site</p>
+            
+            <ul class="space-y-1 mb-4">
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Largest Australian job board</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Filter by location & industry</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Company reviews & salary guides</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Career advice articles</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Email job alerts</span>
+              </li>
+            </ul>
+            
+            <div class="text-sm text-gray-700 mt-4 pt-4 border-t border-gray-200 space-y-1">
+              <div><strong>Cost:</strong> FREE</div>
+              <div>
+                <a href="https://www.seek.com.au" target="_blank" rel="noopener noreferrer" class="text-coral-500 hover:text-teal-500 font-semibold transition-colors">
+                  → Visit SEEK
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+            <h4 class="text-xl font-bold text-gray-800 mb-3">📋 Indeed</h4>
+            <p class="text-gray-600 mb-4 font-semibold">Global Job Search Engine</p>
+            
+            <ul class="space-y-1 mb-4">
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Millions of jobs worldwide</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Upload resume for easy apply</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Company reviews from employees</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Salary comparison tools</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Job alerts & notifications</span>
+              </li>
+            </ul>
+            
+            <div class="text-sm text-gray-700 mt-4 pt-4 border-t border-gray-200 space-y-1">
+              <div><strong>Cost:</strong> FREE</div>
+              <div>
+                <a href="https://au.indeed.com" target="_blank" rel="noopener noreferrer" class="text-coral-500 hover:text-teal-500 font-semibold transition-colors">
+                  → Visit Indeed
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+            <h4 class="text-xl font-bold text-gray-800 mb-3">🏛️ EthicalJobs</h4>
+            <p class="text-gray-600 mb-4 font-semibold">Social Impact & Nonprofit Jobs</p>
+            
+            <ul class="space-y-1 mb-4">
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Jobs in charities & NGOs</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Social enterprise positions</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Community services roles</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>International development work</span>
+              </li>
+            </ul>
+            
+            <div class="text-sm text-gray-700 mt-4 pt-4 border-t border-gray-200 space-y-1">
+              <div class="text-green-600 font-semibold">💚 Great for mission-driven work</div>
+              <div>
+                <a href="https://www.ethicaljobs.com.au" target="_blank" rel="noopener noreferrer" class="text-coral-500 hover:text-teal-500 font-semibold transition-colors">
+                  → Visit EthicalJobs
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+            <h4 class="text-xl font-bold text-gray-800 mb-3">👨‍💼 JobActive</h4>
+            <p class="text-gray-600 mb-4 font-semibold">Government Employment Service</p>
+            
+            <ul class="space-y-1 mb-4">
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>FREE government job search help</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Connect with job providers</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Resume writing assistance</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Interview coaching</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Training & skills programs</span>
+              </li>
+            </ul>
+            
+            <div class="text-sm text-gray-700 mt-4 pt-4 border-t border-gray-200 space-y-1">
+              <div><strong>Cost:</strong> FREE</div>
+              <div>
+                <a href="https://www.jobactive.gov.au" target="_blank" rel="noopener noreferrer" class="text-coral-500 hover:text-teal-500 font-semibold transition-colors">
+                  → Visit JobActive
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+            <h4 class="text-xl font-bold text-gray-800 mb-3">🏪 Retail & Hospitality Jobs</h4>
+            <p class="text-gray-600 mb-4 font-semibold">Entry-Level & Casual Work</p>
+            
+            <ul class="space-y-1 mb-4">
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Apply directly at stores/cafes</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Check Coles, Woolworths, Bunnings</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Cafes often have "We're Hiring" signs</span>
+              </li>
+              <li class="text-sm text-gray-600 flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Great first jobs in Australia</span>
+              </li>
+            </ul>
+            
+            <div class="text-sm text-gray-700 mt-4 pt-4 border-t border-gray-200 space-y-1">
+              <div class="text-orange-600 font-semibold">💡 Tip: Visit in person with resume!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Career Development Resources -->
+      <div class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl p-8 shadow-xl">
+        <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+          <span>📚</span> Career Development Tips
+        </h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white bg-opacity-80 backdrop-blur rounded-xl p-6">
+            <h4 class="font-bold text-lg text-gray-800 mb-3">✍️ Resume & Cover Letter</h4>
+            <ul class="space-y-2 text-sm text-gray-700">
+              <li class="flex items-start gap-2">
+                <span class="text-indigo-500 mt-1">•</span>
+                <span>Australian resumes are typically 2-3 pages</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-indigo-500 mt-1">•</span>
+                <span>Don't include photo, age, or marital status</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-indigo-500 mt-1">•</span>
+                <span>List education, work experience, skills</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-indigo-500 mt-1">•</span>
+                <span>Always customize for each job</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-indigo-500 mt-1">•</span>
+                <span>Get it reviewed at UniMelb Careers Connect!</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-white bg-opacity-80 backdrop-blur rounded-xl p-6">
+            <h4 class="font-bold text-lg text-gray-800 mb-3">🎤 Interview Preparation</h4>
+            <ul class="space-y-2 text-sm text-gray-700">
+              <li class="flex items-start gap-2">
+                <span class="text-purple-500 mt-1">•</span>
+                <span>Research the company beforehand</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-purple-500 mt-1">•</span>
+                <span>Prepare examples using STAR method</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-purple-500 mt-1">•</span>
+                <span>Dress professionally (business casual)</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-purple-500 mt-1">•</span>
+                <span>Arrive 10 minutes early</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-purple-500 mt-1">•</span>
+                <span>Practice with UniMelb mock interviews</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-white bg-opacity-80 backdrop-blur rounded-xl p-6">
+            <h4 class="font-bold text-lg text-gray-800 mb-3">🌐 Networking Tips</h4>
+            <ul class="space-y-2 text-sm text-gray-700">
+              <li class="flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Attend industry events & career fairs</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Join professional associations</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Connect on LinkedIn after events</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Do informational interviews</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-teal-500 mt-1">•</span>
+                <span>Volunteer to build connections</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-white bg-opacity-80 backdrop-blur rounded-xl p-6">
+            <h4 class="font-bold text-lg text-gray-800 mb-3">🎯 Job Search Strategy</h4>
+            <ul class="space-y-2 text-sm text-gray-700">
+              <li class="flex items-start gap-2">
+                <span class="text-orange-500 mt-1">•</span>
+                <span>Apply to 5-10 jobs per week consistently</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-orange-500 mt-1">•</span>
+                <span>Set up job alerts on multiple platforms</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-orange-500 mt-1">•</span>
+                <span>Follow up after 1 week if no response</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-orange-500 mt-1">•</span>
+                <span>Track applications in a spreadsheet</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-orange-500 mt-1">•</span>
+                <span>Don't give up - it takes time!</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Apps Section -->
+    <section id="apps" class="mb-16">
+      <h2 class="text-4xl font-bold text-blue-900 mb-8">📱 Recommended Apps</h2>
+      <p class="text-gray-600 mb-8 text-lg">
+        These apps make life in Melbourne easier. Most are FREE and available on both iPhone and Android.
+      </p>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+          <h3 class="text-xl font-bold text-gray-800 mb-2">🚌 PTV (Public Transport Victoria)</h3>
+          <p class="text-sm text-teal-600 font-semibold mb-3">Navigation • Public Transport • Ticketing</p>
+          <p class="text-gray-600 mb-4">The official app for Melbourne's trams, trains, and buses. Plan journeys, check real-time arrivals, and buy Myki credit.</p>
+          
+          <ul class="space-y-1 mb-4">
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Real-time tram/train/bus tracking</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Journey planner with times</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Buy Myki card & top up online</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Service updates & alerts</span>
+            </li>
+          </ul>
+          
+          <div class="text-sm text-gray-700 mt-4 pt-4 border-t border-gray-200 space-y-1">
+            <div><strong>Cost:</strong> FREE</div>
+            <div>
+              <a href="https://transport.vic.gov.au/" target="_blank" rel="noopener noreferrer" class="text-coral-500 hover:text-teal-500 font-semibold transition-colors">
+                → Visit website
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+          <h3 class="text-xl font-bold text-gray-800 mb-2">🗺️ Google Maps</h3>
+          <p class="text-sm text-teal-600 font-semibold mb-3">Navigation • Directions • Place Information</p>
+          <p class="text-gray-600 mb-4">Essential for finding anything in Melbourne. Get directions via public transport, search for services, read reviews.</p>
+          
+          <ul class="space-y-1 mb-4">
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Turn-by-turn navigation</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Public transport directions</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Business hours & phone numbers</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>User reviews & ratings</span>
+            </li>
+          </ul>
+          
+          <div class="text-sm text-gray-700 mt-4 pt-4 border-t border-gray-200 space-y-1">
+            <div><strong>Cost:</strong> FREE</div>
+            <div class="text-blue-600"><strong>Tip:</strong> Download offline maps before leaving home</div>
+            <div>
+              <a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer" class="text-coral-500 hover:text-teal-500 font-semibold transition-colors">
+                → Visit website
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+          <h3 class="text-xl font-bold text-gray-800 mb-2">🏦 Banking Apps</h3>
+          <p class="text-sm text-teal-600 font-semibold mb-3">Money Management • Transfers • Bill Pay</p>
+          <p class="text-gray-600 mb-4">Once you open a bank account, use the official bank app to manage money, transfer funds, and pay bills securely.</p>
+          
+          <ul class="space-y-1 mb-4">
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Check account balance</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Transfer money</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Pay bills & rent</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Set up automatic payments</span>
+            </li>
+          </ul>
+          
+          <div class="text-sm text-gray-700 mt-4 pt-4 border-t border-gray-200 space-y-1">
+            <div><strong>Cost:</strong> FREE</div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+          <h3 class="text-xl font-bold text-gray-800 mb-2">💚 myGov</h3>
+          <p class="text-sm text-teal-600 font-semibold mb-3">Government Services • Benefits • Information</p>
+          <p class="text-gray-600 mb-4">Official Australian government app. Check your Centrelink payments, Medicare info, and access government services.</p>
+          
+          <ul class="space-y-1 mb-4">
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Check Centrelink payments</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Medicare information</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Tax file number management</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Government service finder</span>
+            </li>
+          </ul>
+          
+          <div class="text-sm text-gray-700 mt-4 pt-4 border-t border-gray-200 space-y-1">
+            <div><strong>Cost:</strong> FREE</div>
+            <div>
+              <a href="https://my.gov.au/" target="_blank" rel="noopener noreferrer" class="text-coral-500 hover:text-teal-500 font-semibold transition-colors">
+                → Visit website
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+          <h3 class="text-xl font-bold text-gray-800 mb-2">🌲 AllTrails</h3>
+          <p class="text-sm text-teal-600 font-semibold mb-3">Hiking Guide • Health & Fitness</p>
+          <p class="text-gray-600 mb-4">Search over 500,000 trails with trail info, maps, detailed reviews, and photos curated by millions of hikers.</p>
+          
+          <ul class="space-y-1 mb-4">
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Extensive Trail Database</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Search and Filter</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Navigation and Activity Tracking</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Personal Profile and Lists</span>
+            </li>
+          </ul>
+          
+          <div class="text-sm text-gray-700 mt-4 pt-4 border-t border-gray-200 space-y-1">
+            <div><strong>Cost:</strong> FREE</div>
+            <div>
+              <a href="https://www.alltrails.com/" target="_blank" rel="noopener noreferrer" class="text-coral-500 hover:text-teal-500 font-semibold transition-colors">
+                → Visit website
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+          <h3 class="text-xl font-bold text-gray-800 mb-2">🏃 Strava</h3>
+          <p class="text-sm text-teal-600 font-semibold mb-3">Running Tracker • Social Fitness</p>
+          <p class="text-gray-600 mb-4">Track runs with GPS, analyze performance data, compete on segments, and connect with millions of runners worldwide.</p>
+          
+          <ul class="space-y-1 mb-4">
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>GPS Activity Tracking</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Segments & Leaderboards</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Social Feed & Challenges</span>
+            </li>
+            <li class="text-sm text-gray-600 flex items-start gap-2">
+              <span class="text-teal-500 mt-1">•</span>
+              <span>Route Discovery</span>
+            </li>
+          </ul>
+          
+          <div class="text-sm text-gray-700 mt-4 pt-4 border-t border-gray-200 space-y-1">
+            <div><strong>Cost:</strong> FREE (Premium $11.99/month)</div>
+            <div>
+              <a href="https://www.strava.com/" target="_blank" rel="noopener noreferrer" class="text-coral-500 hover:text-teal-500 font-semibold transition-colors">
+                → Visit website
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news" class="mb-16">
+      <h2 class="text-4xl font-bold text-blue-900 mb-8">📰 News & Updates</h2>
+      <p class="text-gray-600 mb-8 text-lg">
+        Stay informed about what's happening in Melbourne, Victoria, and Australia. These trusted sources provide news in multiple languages and perspectives.
+      </p>
+
+      <div class="space-y-8">
+        <!-- Local News -->
+        <div class="bg-white rounded-2xl p-8 shadow-xl">
+          <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+            🏙️ Melbourne & Victoria News
+          </h3>
+          
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="border-2 border-gray-200 rounded-xl overflow-hidden hover:border-blue-400 transition-colors">
+              <div class="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4">
+                <h4 class="font-bold text-lg">ABC News Melbourne</h4>
+                <p class="text-sm text-blue-100">Australia's most trusted news source</p>
+              </div>
+              <div class="p-6">
+                <p class="text-gray-600 mb-4">
+                  Local Melbourne news, breaking stories, and community updates. Available in multiple languages.
+                </p>
+                <a href="https://www.abc.net.au/news/melbourne/" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                  Read ABC News →
+                </a>
+              </div>
+            </div>
+
+            <div class="border-2 border-gray-200 rounded-xl overflow-hidden hover:border-blue-400 transition-colors">
+              <div class="bg-gradient-to-r from-gray-700 to-gray-800 text-white p-4">
+                <h4 class="font-bold text-lg">The Age</h4>
+                <p class="text-sm text-gray-300">Victoria's leading newspaper</p>
+              </div>
+              <div class="p-6">
+                <p class="text-gray-600 mb-4">
+                  In-depth coverage of Victorian news, politics, and local issues affecting Melbourne communities.
+                </p>
+                <a href="https://www.theage.com.au/national/victoria" target="_blank" rel="noopener noreferrer" class="inline-block bg-gray-700 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
+                  Read The Age →
+                </a>
+              </div>
+            </div>
+
+            <div class="border-2 border-gray-200 rounded-xl overflow-hidden hover:border-teal-400 transition-colors">
+              <div class="bg-gradient-to-r from-teal-600 to-teal-700 text-white p-4">
+                <h4 class="font-bold text-lg">SBS News</h4>
+                <p class="text-sm text-teal-100">Multicultural perspectives</p>
+              </div>
+              <div class="p-6">
+                <p class="text-gray-600 mb-4">
+                  News with multicultural focus, available in 68 languages. Great for diverse community perspectives.
+                </p>
+                <a href="https://www.sbs.com.au/news/topic/australia" target="_blank" rel="noopener noreferrer" class="inline-block bg-teal-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-teal-700 transition-colors">
+                  Read SBS News →
+                </a>
+              </div>
+            </div>
+
+            <div class="border-2 border-gray-200 rounded-xl overflow-hidden hover:border-red-400 transition-colors">
+              <div class="bg-gradient-to-r from-red-600 to-red-700 text-white p-4">
+                <h4 class="font-bold text-lg">Herald Sun</h4>
+                <p class="text-sm text-red-100">Melbourne's daily newspaper</p>
+              </div>
+              <div class="p-6">
+                <p class="text-gray-600 mb-4">
+                  Daily news, sports, entertainment, and local events happening across Melbourne.
+                </p>
+                <a href="https://www.heraldsun.com.au/news/victoria" target="_blank" rel="noopener noreferrer" class="inline-block bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+                  Read Herald Sun →
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Community Resources -->
+        <div class="bg-white rounded-2xl p-8 shadow-xl">
+          <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+            🤝 Community Resources & Updates
+          </h3>
+          
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="border-2 border-teal-200 rounded-xl overflow-hidden hover:border-teal-400 transition-colors">
+              <div class="bg-gradient-to-r from-teal-600 to-teal-700 text-white p-4">
+                <h4 class="font-bold text-lg">City of Melbourne</h4>
+                <p class="text-sm text-teal-100">Official city announcements</p>
+              </div>
+              <div class="p-6">
+                <p class="text-gray-600 mb-4">
+                  Community events, services, road closures, and local government updates.
+                </p>
+                <a href="https://www.melbourne.vic.gov.au/news-and-media/Pages/News-and-media.aspx" target="_blank" rel="noopener noreferrer" class="inline-block bg-teal-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-teal-700 transition-colors">
+                  View Updates →
+                </a>
+              </div>
+            </div>
+
+            <div class="border-2 border-orange-200 rounded-xl overflow-hidden hover:border-orange-400 transition-colors">
+              <div class="bg-gradient-to-r from-orange-600 to-orange-700 text-white p-4">
+                <h4 class="font-bold text-lg">Refugee Council of Australia</h4>
+                <p class="text-sm text-orange-100">Advocacy & information</p>
+              </div>
+              <div class="p-6">
+                <p class="text-gray-600 mb-4">
+                  Policy updates, advocacy news, and resources.
+                </p>
+                <a href="https://www.refugeecouncil.org.au/news/" target="_blank" rel="noopener noreferrer" class="inline-block bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-700 transition-colors">
+                  Read News →
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Emergency Section -->
+    <section id="emergency" class="mb-16">
+      <div class="bg-gradient-to-r from-red-500 to-orange-500 rounded-2xl p-8 text-white shadow-2xl">
+        <h2 class="text-3xl font-bold mb-4">🚨 Emergency & Crisis Support</h2>
+        <p class="text-lg mb-6">If you're in danger or crisis, help is available 24/7. You're not alone.</p>
+        
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-white bg-opacity-20 backdrop-blur rounded-xl p-6">
+            <h3 class="text-xl font-semibold mb-2">🚑 Life-Threatening</h3>
+            <div class="text-4xl font-bold mb-2">000</div>
+            <p class="text-sm">FREE • 24/7 • Police, Ambulance, Fire</p>
+          </div>
+          
+          <div class="bg-white bg-opacity-20 backdrop-blur rounded-xl p-6">
+            <h3 class="text-xl font-semibold mb-2">🏥 Mental Health</h3>
+            <div class="text-4xl font-bold mb-2">13 11 14</div>
+            <p class="text-sm">Lifeline • FREE • 24/7</p>
+          </div>
+          
+          <div class="bg-white bg-opacity-20 backdrop-blur rounded-xl p-6">
+            <h3 class="text-xl font-semibold mb-2">⚖️ Legal Help</h3>
+            <div class="text-2xl font-bold mb-2">(03) 9347 8633</div>
+            <p class="text-sm">VCAL • Interpreters available</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-blue-900 text-white py-12 px-4">
+    <div class="max-w-7xl mx-auto text-center">
+      <p class="text-lg mb-2">© 2026 Refugee Student Settlement Pathway • SkillPath</p>
+      <p class="text-blue-300">
+        For more information, visit
+        <a href="https://www.skillpath.org.au" class="text-teal-300 hover:underline">skillpath.org.au</a>
+      </p>
+      <div class="mt-6 flex justify-center gap-4">
+        <svg class="w-5 h-5 text-teal-300" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+        </svg>
+        <span class="text-sm text-blue-200">Built with ❤️ for our community</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Tips rotation
+    const tips = [
+      "Free trams in the CBD! No Myki needed in the city center.",
+      "Many museums offer FREE entry - check before you visit!",
+      "Libraries have free WiFi, computers, and English practice groups.",
+      "Queen Victoria Market has the cheapest fresh produce on weekends.",
+      "Download offline maps before exploring new areas.",
+    ];
+    
+    let tipIndex = 0;
+    setInterval(() => {
+      tipIndex = (tipIndex + 1) % tips.length;
+      document.getElementById('tipOfDay').textContent = tips[tipIndex];
+    }, 8000);
+
+    // Checklist data
+    const checklistItems = [
+      { 
+        id: 1, 
+        title: "Register for Government Services", 
+        week: 1,
+        why: "These are the foundation for everything else—money, health, housing.",
+        details: [
+          "Visit Centrelink (inside a Services Australia office) to register for income support",
+          "Ask about your Customer Reference Number (CRN)—you'll need this for almost everything",
+          "Find your nearest office at servicesaustralia.gov.au/locations"
+        ],
+        link: "https://www.servicesaustralia.gov.au/locations"
+      },
+      { 
+        id: 2, 
+        title: "Get a Myki Card", 
+        week: 1,
+        why: "Your ticket for all trams, trains, and buses in Melbourne.",
+        details: [
+          "Buy a card at any convenience store or supermarket (costs about $6)",
+          "Top it up with money (e.g., $20 for about a week of travel)",
+          "Tip: Trams are FREE in the CBD (city center)!"
+        ]
+      },
+      { 
+        id: 3, 
+        title: "Open an Australian Bank Account", 
+        week: 1,
+        why: "You need this to get paid, pay bills, and manage money safely.",
+        details: [
+          "Go to a major bank (Commonwealth, Westpac, ANZ, NAB) with your passport and visa",
+          "Ask for a proof-of-address letter from your housing provider if needed",
+          "They'll help you open an account on the spot—it's free!"
+        ]
+      },
+      { 
+        id: 4, 
+        title: "Enrol in Medicare", 
+        week: 1,
+        weekRange: "1-2",
+        why: "Free or cheap healthcare.",
+        details: [
+          "Visit a Medicare office (usually inside Centrelink) 7–10 days after arrival",
+          "Bring your passport and visa documents",
+          "You'll get a Medicare card in about 2 weeks"
+        ]
+      },
+      { 
+        id: 5, 
+        title: "Utilizing your Settlement Provider", 
+        week: 1,
+        why: "They're expert helpers who will guide you through everything and can help with housing, language classes, and more.",
+        details: [
+          "SkillPath – first point of contact, use your welcome groups!",
+          "UniMelb Stop 1 – university specific support",
+          "AMES Australia – accommodation, English classes, job training",
+          "Uniting Vic.Tas – housing, food, community support"
+        ]
+      },
+      { 
+        id: 6, 
+        title: "Get a Local Doctor", 
+        week: 2,
+        weekRange: "2-3",
+        why: "For health checks, vaccinations, and sick care.",
+        details: [
+          "Look for a bulk-billing GP (free doctor visit) near you using Google Maps",
+          "Call and ask if they accept new patients and have interpreters available",
+          "Book an appointment—your first visit is often a free health check"
+        ]
+      },
+      { 
+        id: 7, 
+        title: "Meet a Local Migrant Resource Centre", 
+        week: 3,
+        weekRange: "3-4",
+        why: "They offer free advice, material help (food, clothing), and can connect you to local community.",
+        note: "See the 'Key Support Services' section for centres near you."
+      },
+    ];
+
+    // Explore data
+    const exploreContent = {
+      parks: [
+        { id: 'rbg', name: '🌳 Royal Botanic Gardens Melbourne', desc: 'FREE entry • 94 acres of beautiful gardens with 8,000+ plant species', details: ['Children\'s Garden', 'Aboriginal Heritage Walk', 'Lake walks and picnic areas', 'Open daily 7:30 AM – 8:30 PM'], location: 'Birdwood Avenue, Melbourne', transport: 'Trams 8, 16, 72' },
+        { id: 'fitzroy', name: '🌲 Fitzroy Gardens', desc: 'FREE entry • 64 acres of historic gardens since 1848', details: ['Beautiful elm-lined avenues', 'Faeries\' Tree (carved gum tree)', 'Captain Cook\'s Cottage', 'Scarred Tree (Aboriginal heritage)'], location: 'Wellington Parade, East Melbourne', transport: 'Tram 48, 75' },
+        { id: 'qvpark', name: '🌺 Queen Victoria Park', desc: 'FREE entry • Historic park with sculptures and botanical displays', details: ['Beautiful walking paths', 'Floral displays', 'Picnic areas', 'Close to city center'], location: 'St Kilda Road, Melbourne' },
+        { id: 'dandenong', name: '🌲 Dandenong Ranges National Park', desc: 'FREE entry • Stunning mountain rainforest just 1 hour away', details: ['Fern Gully walking trails', 'Native bird watching', 'Picnic areas', 'Great day trip from city'], location: 'Olinda/Sassafras (East of Melbourne)', transport: 'Train to Belgrave, then shuttle' },
+      ],
+      museums: [
+        { id: 'ngv', name: '🎨 National Gallery of Victoria (NGV)', desc: 'FREE admission to permanent collection • World-class art from ancient to contemporary', details: ['International masterpieces', 'Australian art', 'Modern & contemporary works', 'Beautiful architecture'], link: 'https://www.ngv.vic.gov.au' },
+        { id: 'library', name: '📚 State Library of Victoria', desc: 'Historic building (est. 1854) with free exhibitions, stunning dome, reading rooms', details: ['FREE exhibitions', 'Iconic domed reading room', 'Public library access', 'Quiet study spaces'], link: 'https://www.slv.vic.gov.au' },
+        { id: 'acmi', name: '🎬 Australian Centre for the Moving Image (ACMI)', desc: 'FREE exhibitions • Film, video, and digital art • Cinema shows indie films (cheap)', details: ['Film exhibitions', 'Digital art displays', 'Cinema screenings', 'Educational programs'], link: 'https://www.acmi.net.au' },
+        { id: 'melbmuseum', name: '🏛️ Melbourne Museum', desc: '$20-30 entry • Dinosaurs, Aboriginal history, natural science, cultural artifacts', details: ['Dinosaur fossils', 'Indigenous culture exhibits', 'Natural history', 'Interactive displays'], link: 'https://museumvictoria.com.au' },
+      ],
+      food: [
+        { id: 'richmond', name: '🍲 Richmond Vietnamese Strip', desc: 'Largest Vietnamese community in Australia. Incredible pho, bánh mì, and Vietnamese dishes at LOW PRICES!', details: ['Authentic pho ($8-12)', 'Bánh mì sandwiches ($4-7)', 'Fresh spring rolls', '100+ restaurants & cafes'], budget: '$5-12 per meal', location: 'Victoria Street, Richmond' },
+        { id: 'footscray', name: '🍜 Footscray Food Scene', desc: 'Diverse neighbourhood with Italian, Greek, Vietnamese, and Lebanese cuisines. Budget-friendly and AUTHENTIC!', details: ['Greek tavernas', 'Italian pasta & pizza', 'Lebanese kebabs', 'Vietnamese & Chinese options'], budget: '$6-15 per meal', location: 'Barkly Street, Footscray' },
+        { id: 'qvm', name: '🏪 Queen Victoria Market', desc: 'Iconic 150-year-old market with food stalls, fresh produce, clothes, souvenirs. Amazing value!', details: ['Fresh fruit & vegetables', 'Cheap street food', 'Evening food stalls (weekend)', 'Local & international food'], budget: '$10-20 for lunch', location: 'Queen Street, CBD' },
+        { id: 'chinatown', name: '🥟 Chinatown & South Melbourne Market', desc: 'Amazing Asian cuisine at budget prices • Fresh food court with multiple cuisines', details: ['Dim sum & dumplings', 'Noodle shops', 'Food court stalls', 'Very cheap ($5-10)'], location: 'Little Bourke Street & Prahran Market' },
+      ],
+      beaches: [
+        { id: 'brighton', name: '🏖️ Brighton Beach', desc: 'Beautiful beach with famous colorful bathing boxes, just 30 minutes from CBD by train', details: ['Iconic beach boxes (Instagram-famous!)', 'Swimming beach', 'Waterfront restaurants', 'Sandy beach'], cost: 'FREE', transport: 'Train to Brighton Beach' },
+        { id: 'stkilda', name: '🌊 St Kilda Beach', desc: 'Popular beach with Luna Park amusement park and bustling promenade', details: ['Swimming beach', 'Luna Park (rides & fun)', 'St Kilda Pier & penguins', 'Restaurants & bars'], cost: 'Beach FREE; Luna Park has entry fee', transport: 'Tram 16 from CBD' },
+        { id: 'williamstown', name: '🏝️ Williamstown Beach', desc: 'Charming beach town with historic architecture, waterfront walks, and cafes', details: ['Sandy beach', 'Historic fort', 'Waterfront promenade', 'Scenic views'], cost: 'FREE', transport: 'Train from CBD (20 mins)' },
+      ],
+      neighborhoods: [
+        { id: 'fitzroy', name: '🎭 Fitzroy', desc: 'Trendy, multicultural neighbourhood with street art, cafes, vintage shops, and galleries', details: ['Street art & murals', 'Specialty coffee culture', 'Vintage & second-hand shops', 'Live music venues'], vibe: 'Artsy & hipster', transport: 'Tram 6, 37, 39' },
+        { id: 'carlton', name: '🌳 Carlton', desc: 'Bohemian university neighbourhood with Lygon Street\'s famous Italian restaurants and shops', details: ['Lygon Street (Italian enclave)', 'Spectrum Migrant Resource Centre', 'University of Melbourne', 'Historic architecture'], vibe: 'Student & cultural', transport: 'Tram 1, 6, 16' },
+        { id: 'stkildab', name: '🌊 St Kilda', desc: 'Seaside suburb with beach, Luna Park, pier, and bohemian atmosphere', details: ['Beach & swimming', 'St Kilda Pier & penguins!', 'Luna Park amusement park', 'Vibrant street scene'], vibe: 'Bohemian & beachy', transport: 'Tram 16 from CBD' },
+      ],
+      sports: [
+        { id: 'clubs', name: '🏀 Sports & Recreation Clubs', desc: 'Melbourne has hundreds of affordable sporting clubs for all interests', details: ['Soccer/Football clubs', 'Basketball courts', 'Tennis clubs', 'Badminton & volleyball'], cost: '$5-15/week membership', info: 'Search "sports clubs [suburb]"' },
+        { id: 'pools', name: '🏊 Swimming Pools', desc: 'Public swimming pools throughout Melbourne at very low cost', details: ['Olympic swimming facilities', 'Learn to swim classes', 'Public pools in every suburb', 'Very cheap ($3-8 entry)'], cost: '$3-8 per visit', find: 'Search "aquatic centres [suburb]"' },
+        { id: 'afl', name: '⚽ Australian Rules Football', desc: 'Experience the world\'s best footy! Support a local team', details: ['Melbourne teams (9 AFL clubs)', 'MCG stadium (100,000 capacity!)', 'Electric atmosphere', 'Affordable tickets'], season: 'March-September', cost: '$15-50 per ticket' },
+      ],
+      events: [
+        { id: 'calendar', name: '🎪 Melbourne Events Calendar', desc: 'Melbourne hosts incredible events year-round! Check what\'s on:', details: ['Melbourne International Comedy Festival (April)', 'White Night (biennial)', 'Melbourne Music Week (November)', 'Festival of Arts & Culture'], link: 'https://whatson.melbourne.vic.gov.au' },
+        { id: 'fringe', name: '🎭 Melbourne Fringe Festival', desc: 'September • Theatre, comedy, dance, art shows across the city', details: ['100+ shows', 'Affordable tickets', 'Diverse performances', 'International artists'], link: 'https://www.melbournefringe.com.au' },
+        { id: 'music', name: '🎵 Live Music Venues', desc: 'Melbourne has an incredible live music scene with venues for all genres', details: ['Small bars & pubs with live bands', 'Large venues (Rod Laver Arena)', 'Jazz clubs & blues bars', 'Open mic nights (often FREE)'], cost: 'FREE-$50 depending on venue', find: 'Check Ticketek or Ticketmaster' },
+      ],
+    };
+
+    // State management
+    let checklist = {};
+    let favorites = [];
+    let activeTab = 'parks';
+    let mounted = false;
+
+    // Load data from storage
+    async function loadData() {
+      try {
+        const checklistData = await window.storage.get('checklist').catch(() => null);
+        const favData = await window.storage.get('favorites').catch(() => null);
+        const langData = await window.storage.get('language').catch(() => null);
+
+        if (checklistData?.value) checklist = JSON.parse(checklistData.value);
+        if (favData?.value) favorites = JSON.parse(favData.value);
+        if (langData?.value) {
+          document.getElementById('languageSelect').value = langData.value;
+        }
+      } catch (error) {
+        console.log('First time visitor - welcome!');
+      }
+      mounted = true;
+      updateProgress();
+      renderChecklist();
+      renderExplore();
+    }
+
+    // Save checklist
+    async function saveChecklist() {
+      if (mounted) {
+        try {
+          await window.storage.set('checklist', JSON.stringify(checklist));
+        } catch (e) {
+          console.log('Could not save checklist');
+        }
+      }
+    }
+
+    // Save favorites
+    async function saveFavorites() {
+      if (mounted) {
+        try {
+          await window.storage.set('favorites', JSON.stringify(favorites));
+        } catch (e) {
+          console.log('Could not save favorites');
+        }
+      }
+    }
+
+    // Toggle checklist item
+    function toggleChecklistItem(id) {
+      checklist[id] = !checklist[id];
+      saveChecklist();
+      updateProgress();
+      renderChecklist();
+      
+      const allCompleted = checklistItems.every(item => checklist[item.id]);
+      if (allCompleted) {
+        setTimeout(() => {
+          document.getElementById('celebrationModal').classList.remove('hidden');
+        }, 500);
+      }
+    }
+
+    // Toggle favorite
+    function toggleFavorite(id) {
+      if (favorites.includes(id)) {
+        favorites = favorites.filter(f => f !== id);
+      } else {
+        favorites.push(id);
+      }
+      saveFavorites();
+      renderExplore();
+    }
+
+    // Update progress
+    function updateProgress() {
+      const completedCount = Object.values(checklist).filter(Boolean).length;
+      const progressPercent = Math.round((completedCount / checklistItems.length) * 100);
+      
+      document.getElementById('completedCount').textContent = `${completedCount}/7`;
+      document.getElementById('progressPercent').textContent = `${progressPercent}%`;
+      document.getElementById('progressText').textContent = `${completedCount} of ${checklistItems.length} completed`;
+      document.getElementById('progressPercentText').textContent = `${progressPercent}%`;
+      document.getElementById('progressBar').style.width = `${progressPercent}%`;
+    }
+
+    // Render checklist
+    function renderChecklist() {
+      const container = document.getElementById('checklistContainer');
+      container.innerHTML = checklistItems.map(item => `
+        <div class="bg-white rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl border-l-4 ${
+          checklist[item.id] ? 'border-teal-500 bg-teal-50' : 'border-gray-300'
+        }">
+          <div class="flex items-start gap-4 mb-4">
+            <button onclick="toggleChecklistItem(${item.id})" class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all hover:scale-110 ${
+              checklist[item.id] ? 'bg-teal-500 scale-110' : 'bg-gray-300 hover:bg-gray-400'
+            }">
+              ${checklist[item.id] ? '<svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>' : ''}
+            </button>
+            <div class="flex-1">
+              <h3 class="text-xl font-semibold mb-2 ${
+                checklist[item.id] ? 'text-teal-700' : 'text-gray-800'
+              }">
+                Week ${item.weekRange || item.week}: ${item.title}
+              </h3>
+              ${item.why ? `<p class="text-gray-700 mb-3"><strong>Why?</strong> ${item.why}</p>` : ''}
+              ${item.details ? `
+                <ul class="space-y-2 mb-3">
+                  ${item.details.map(detail => `
+                    <li class="text-gray-600 flex items-start gap-2">
+                      <span class="text-teal-500 mt-1">•</span>
+                      <span>${detail}</span>
+                    </li>
+                  `).join('')}
+                </ul>
+              ` : ''}
+              ${item.link ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer" class="inline-block text-coral-500 hover:text-teal-500 font-semibold transition-colors mb-3">→ ${item.link.replace('https://', '').replace('www.', '')}</a>` : ''}
+              ${item.note ? `<p class="text-gray-500 italic text-sm mt-3">${item.note}</p>` : ''}
+              <button onclick="toggleChecklistItem(${item.id})" class="mt-4 px-4 py-2 rounded-lg font-medium transition-all ${
+                checklist[item.id] 
+                  ? 'bg-teal-100 text-teal-700 hover:bg-teal-200' 
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }">
+                ${checklist[item.id] ? '✅ Completed!' : 'Mark this done'}
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Set active explore tab
+    function setActiveTab(tab) {
+      activeTab = tab;
+      // Update tab buttons
+      ['parks', 'museums', 'food', 'beaches', 'neighborhoods', 'sports', 'events'].forEach(t => {
+        const btn = document.getElementById(`tab-${t}`);
+        if (t === tab) {
+          btn.className = 'px-6 py-3 rounded-xl font-semibold whitespace-nowrap transition-all bg-gradient-to-r from-coral-500 to-pink-500 text-white shadow-lg scale-105';
+        } else {
+          btn.className = 'px-6 py-3 rounded-xl font-semibold whitespace-nowrap transition-all bg-white text-gray-700 hover:bg-gray-100';
+        }
+      });
+      renderExplore();
+    }
+
+    // Render explore section
+    function renderExplore() {
+      const container = document.getElementById('exploreGrid');
+      const places = exploreContent[activeTab] || [];
+      
+      container.innerHTML = places.map(place => `
+        <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 relative overflow-hidden group">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-teal-100 to-blue-100 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+          
+          <button onclick="toggleFavorite('${place.id}')" class="absolute top-4 right-4 z-10 p-3 rounded-full bg-white shadow-lg hover:scale-110 transition-transform">
+            <svg class="w-6 h-6 ${favorites.includes(place.id) ? 'fill-red-500 text-red-500' : 'text-gray-400'}" fill="${favorites.includes(place.id) ? 'currentColor' : 'none'}" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+            </svg>
+          </button>
+
+          <div class="relative z-10">
+            <h3 class="text-xl font-bold text-gray-800 mb-3 pr-8">${place.name}</h3>
+            <p class="text-gray-600 mb-4">${place.desc}</p>
+            
+            ${place.details ? `
+              <ul class="space-y-1 mb-4">
+                ${place.details.map(detail => `
+                  <li class="text-sm text-gray-600 flex items-start gap-2">
+                    <span class="text-teal-500 mt-1">•</span>
+                    <span>${detail}</span>
+                  </li>
+                `).join('')}
+              </ul>
+            ` : ''}
+            
+            ${place.location ? `
+              <div class="text-sm text-gray-500 mt-3 pt-3 border-t border-gray-200">
+                <div class="font-semibold">Location:</div>
+                <div>${place.location}</div>
+                ${place.transport ? `<div class="mt-1">Transport: ${place.transport}</div>` : ''}
+              </div>
+            ` : ''}
+            
+            ${place.budget ? `
+              <div class="text-sm text-gray-500 mt-3 pt-3 border-t border-gray-200">
+                <div class="font-semibold">Budget:</div>
+                <div>${place.budget}</div>
+              </div>
+            ` : ''}
+            
+            ${place.cost ? `
+              <div class="text-sm text-gray-500 mt-3 pt-3 border-t border-gray-200">
+                <div class="font-semibold">Cost:</div>
+                <div>${place.cost}</div>
+              </div>
+            ` : ''}
+            
+            ${place.link ? `
+              <a href="${place.link}" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 text-coral-500 hover:text-teal-500 font-semibold transition-colors">
+                → Visit website
+              </a>
+            ` : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Close celebration modal
+    function closeCelebration() {
+      document.getElementById('celebrationModal').classList.add('hidden');
+    }
+
+    // Mobile menu toggle
+    document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    });
+
+    // Language selection
+    document.getElementById('languageSelect').addEventListener('change', async (e) => {
+      if (mounted) {
+        try {
+          await window.storage.set('language', e.target.value);
+        } catch (err) {
+          console.log('Could not save language preference');
+        }
+      }
+    });
+
+    // Initialize
+    loadData();
+  </script>
+</body>
+</html>
